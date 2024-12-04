@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +22,37 @@ namespace GameDevelopmentProject
         }
         private Texture2D herotexture;
         Animation.Animation animation;
+        private Vector2 position;
 
         public void Update(GameTime gametime)
         {
             animation.Update(gametime);
+
+            // Get the current state of the keyboard
+            KeyboardState state = Keyboard.GetState();
+
+            // Move the hero based on arrow key input
+            if (state.IsKeyDown(Keys.Up))
+            {
+                position.Y -= 2; // Move up
+            }
+            if (state.IsKeyDown(Keys.Down))
+            {
+                position.Y += 2; // Move down
+            }
+            if (state.IsKeyDown(Keys.Left))
+            {
+                position.X -= 2; // Move left
+            }
+            if (state.IsKeyDown(Keys.Right))
+            {
+                position.X += 2; // Move right
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(herotexture, new Vector2(10, 10), animation.currFrame.sourceRectangle, Color.White);
+            spriteBatch.Draw(herotexture, position, animation.currFrame.sourceRectangle, Color.White);
         }
     }
 }
