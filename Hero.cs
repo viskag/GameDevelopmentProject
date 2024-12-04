@@ -15,38 +15,107 @@ namespace GameDevelopmentProject
         {
             herotexture = texture;
             animation = new Animation.Animation();
+
+            // beweging Down frames
             animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 0, 66, 66)));
             animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 0, 66, 66)));
             animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 0, 66, 66)));
             animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 0, 66, 66)));
+
+            // beweging Left frames
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 66, 66, 66)));
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 66, 66, 66)));
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 66, 66, 66)));
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 66, 66, 66)));
+
+            // beweging Right frames
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 132, 66, 66))); 
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 132, 66, 66))); 
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 132, 66, 66)));
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 132, 66, 66))); 
+
+            // beweging Up frames
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 198, 66, 66))); 
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 198, 66, 66)));
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 198, 66, 66)));
+            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 198, 66, 66)));
+
+            currDirection = "d";
         }
+
         private Texture2D herotexture;
         Animation.Animation animation;
         private Vector2 position;
+        private string currDirection;
+        private int idleFrameIndex;
 
         public void Update(GameTime gametime)
+        {//animation.Update(gametime);
+
+            // ophalen bewegingsinput
+            KeyboardState inputKey = Keyboard.GetState();
+
+            // checken wat de input key is
+            if (inputKey.IsKeyDown(Keys.Up))
+            {
+                position.Y -= 2; // ga naar boven
+                currDirection = "u";
+                idleFrameIndex = 12; // idle frame bijhouden
+            }
+            else if (inputKey.IsKeyDown(Keys.Down))
+            {
+                position.Y += 2; // ga naar beneden
+                currDirection = "d";
+                idleFrameIndex = 0; // idle frame bijhouden
+            }
+            else if (inputKey.IsKeyDown(Keys.Left))
+            {
+                position.X -= 2; // ga naar links
+                currDirection = "l";
+                idleFrameIndex = 4; // idle frame bijhouden
+            }
+            else if (inputKey.IsKeyDown(Keys.Right))
+            {
+                position.X += 2; // ga naar rechts
+                currDirection = "r";
+                idleFrameIndex = 8; // idle frame bijhouden
+            }
+            else
+            {
+                currDirection = "i";
+            }
+
+            // animation update
+            UpdateAnimation(gametime);
+        }
+        private void UpdateAnimation(GameTime gametime)
         {
-            animation.Update(gametime);
+            // animation update op huidig direction
+            if (currDirection == "u")
+            {
+                animation.Update(gametime);
+                animation.currFrame = animation.frames[12 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Up frames
+            }
+            else if (currDirection == "d")
+            {
+                animation.Update(gametime);
+                animation.currFrame = animation.frames[0 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Down frames
+            }
+            else if (currDirection == "l")
+            {
+                animation.Update(gametime);
+                animation.currFrame = animation.frames[4 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Left frames
+            }
+            else if (currDirection == "r")
+            {
+                animation.Update(gametime);
+                animation.currFrame = animation.frames[8 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Right frames
 
-            // Get the current state of the keyboard
-            KeyboardState state = Keyboard.GetState();
-
-            // Move the hero based on arrow key input
-            if (state.IsKeyDown(Keys.Up))
-            {
-                position.Y -= 2; // Move up
             }
-            if (state.IsKeyDown(Keys.Down))
+            else
             {
-                position.Y += 2; // Move down
-            }
-            if (state.IsKeyDown(Keys.Left))
-            {
-                position.X -= 2; // Move left
-            }
-            if (state.IsKeyDown(Keys.Right))
-            {
-                position.X += 2; // Move right
+                // bij idle/stilstaan moet laatste animatie worden ingenomen (de eerste frame daarvan)
+                animation.currFrame = animation.frames[idleFrameIndex];
             }
         }
 

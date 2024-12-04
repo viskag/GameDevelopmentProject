@@ -14,7 +14,7 @@ namespace GameDevelopmentProject.Animation
             frames = new List<AnimationFrame>();
         }
         public AnimationFrame currFrame { get; set; }
-        private List<AnimationFrame> frames;
+        public List<AnimationFrame> frames;
         private int counter;
         private double frameMovement = 0;
         public void AddFrame(AnimationFrame animationFrame)
