@@ -12,6 +12,14 @@ namespace GameDevelopmentProject
 {
     internal class Hero : IGameObject
     {
+        public enum Direction
+        {
+            Up,
+            Down,
+            Left,
+            Right,
+            Idle
+        }
         public Hero(Texture2D texture, int fwidth, int fheight)
         {
             herotexture = texture;
@@ -20,13 +28,13 @@ namespace GameDevelopmentProject
             MakeAnimation(animation, fwidth, fheight);
 
             currDirection = "d"; // startdirection (down) en startpositie (center)
-            position = new Vector2(Game1.screenWidth/2-66/2, Game1.screenHeight/2-66/2);
+            position = new Vector2(Game1.screenWidth/2-fwidth/2, Game1.screenHeight/2-fheight/2);
         }
 
         private void MakeAnimation(Animation.Animation anim, int fwidth, int fheight)
         {
             int rows = 4; // rijen zijn de 4 richtingen
-            int columns = 4; // per richting 4 frames
+            int columns = 4; // per richting 4 frames de kolomen
 
             for (int row = 0; row < rows; row++) // voor elke richting...
             {
@@ -50,17 +58,12 @@ namespace GameDevelopmentProject
         private Vector2 maxSpeed = new Vector2(4,4);
         private Vector2 acceleration = new Vector2(0.1f, 0.1f);
 
-        public void Update(GameTime gametime)
-        {animation.Update(gametime);//
-
-            KeyboardState inputKey = Keyboard.GetState(); // ophalen bewegingsinput
-
-            
+        public void Move(KeyboardState inputKey)
+        {
             if (Keyboard.GetState().IsKeyDown(Keys.Space)) // sprint en walk mechanic
             {
                 currSpeed = maxSpeed;
             }
-            
             if (inputKey.IsKeyDown(Keys.Up)) // checken wat de input key is
             {
                 position.Y -= currSpeed.Y; // ga naar boven
@@ -86,15 +89,22 @@ namespace GameDevelopmentProject
                 idleFrameIndex = 8; // idle frame bijhouden
             }
             else currDirection = "i";
-
             currSpeed = walkSpeed; // terug op walkspeed zetten
-
-            UpdateAnimation(gametime); // animation update
         }
 
-        private void UpdateAnimation(GameTime gametime)
+        public void Update(GameTime gametime)
+        {animation.Update(gametime);//
+
+            KeyboardState inputKey = Keyboard.GetState(); // ophalen bewegingsinput
+
+            Move(inputKey); // move method uitvoeren afh vd keyboardstate
+
+            UpdateAnimationFrame(gametime); // animation update
+        }
+
+        private void UpdateAnimationFrame(GameTime gametime)
         {
-            // animation update op huidig direction
+            // animation frame update op huidig direction
             if (currDirection == "u")
             {//animation.Update(gametime);
                 animation.currFrame = animation.frames[12 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Up frames
