@@ -9,14 +9,19 @@ namespace GameDevelopmentProject
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private Texture2D texture;
+        private Texture2D heroTexture;
         Hero hero;
+        static public int screenWidth = 1280;//schermgrootte breedte
+        static public int screenHeight = 720;//schermgrootte hoogte
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            _graphics.PreferredBackBufferWidth = screenWidth;
+            _graphics.PreferredBackBufferHeight = screenHeight;
         }
 
         protected override void Initialize()
@@ -32,14 +37,14 @@ namespace GameDevelopmentProject
 
             // TODO: use this.Content to load your game content here
 
-            texture = Content.Load<Texture2D>("assangesprite");
+            heroTexture = Content.Load<Texture2D>("assangesprite");
 
             InitializeGameObjects();
         }
 
         private void InitializeGameObjects()
         {
-            hero = new Hero(texture);
+            hero = new Hero(heroTexture);
         }
 
         protected override void Update(GameTime gameTime)
