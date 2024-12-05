@@ -20,14 +20,14 @@ namespace GameDevelopmentProject
             Right,
             Idle
         }
-        public Hero(Texture2D texture, int fwidth, int fheight)
+        public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection)
         {
             herotexture = texture;
             animation = new Animation.Animation();
 
             MakeAnimation(animation, fwidth, fheight);
 
-            currDirection = "d"; // startdirection (down) en startpositie (center)
+            currDirection = startDirection; // startdirection (down) en startpositie (center)
             position = new Vector2(Game1.screenWidth/2-fwidth/2, Game1.screenHeight/2-fheight/2);
         }
 
@@ -49,9 +49,9 @@ namespace GameDevelopmentProject
         }
 
         private Texture2D herotexture;
-        Animation.Animation animation;
-        private string currDirection;
         private int idleFrameIndex;
+        private Direction currDirection;
+        Animation.Animation animation;
         private Vector2 position;
         private Vector2 currSpeed;
         private Vector2 walkSpeed = new Vector2(1,1);
@@ -64,31 +64,31 @@ namespace GameDevelopmentProject
             {
                 currSpeed = maxSpeed;
             }
-            if (inputKey.IsKeyDown(Keys.Up)) // checken wat de input key is
+            if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
                 position.Y -= currSpeed.Y; // ga naar boven
-                currDirection = "u";
+                currDirection = Direction.Up;
                 idleFrameIndex = 12; // idle frame bijhouden
             }
-            else if (inputKey.IsKeyDown(Keys.Down))
+            else if (inputKey.IsKeyDown(Keys.Down) && position.Y + currSpeed.Y <= Game1.screenHeight)
             {
                 position.Y += currSpeed.Y; // ga naar beneden
-                currDirection = "d";
+                currDirection = Direction.Down;
                 idleFrameIndex = 0; // idle frame bijhouden
             }
-            else if (inputKey.IsKeyDown(Keys.Left))
+            else if (inputKey.IsKeyDown(Keys.Left) && position.X - currSpeed.X >= 0)
             {
                 position.X -= currSpeed.X; // ga naar links
-                currDirection = "l";
+                currDirection = Direction.Left;
                 idleFrameIndex = 4; // idle frame bijhouden
             }
-            else if (inputKey.IsKeyDown(Keys.Right))
+            else if (inputKey.IsKeyDown(Keys.Right) && position.Y + currSpeed.Y <= Game1.screenWidth)
             {
                 position.X += currSpeed.X; // ga naar rechts
-                currDirection = "r";
+                currDirection = Direction.Right;
                 idleFrameIndex = 8; // idle frame bijhouden
             }
-            else currDirection = "i";
+            else currDirection = Direction.Idle;
             currSpeed = walkSpeed; // terug op walkspeed zetten
         }
 
@@ -104,26 +104,25 @@ namespace GameDevelopmentProject
 
         private void UpdateAnimationFrame(GameTime gametime)
         {
-            // animation frame update op huidig direction
-            if (currDirection == "u")
-            {//animation.Update(gametime);
-                animation.currFrame = animation.frames[12 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Up frames
+            // animation frame update/correctie voor huidig direction
+            switch (currDirection)
+            {
+                case Direction.Up:
+                    animation.currFrame = animation.frames[12 + (animation.frames.IndexOf(animation.currFrame) % 4)];
+                    break;
+                case Direction.Down:
+                    animation.currFrame = animation.frames[0 + (animation.frames.IndexOf(animation.currFrame) % 4)];
+                    break;
+                case Direction.Left:
+                    animation.currFrame = animation.frames[4 + (animation.frames.IndexOf(animation.currFrame) % 4)];
+                    break;
+                case Direction.Right:
+                    animation.currFrame = animation.frames[8 + (animation.frames.IndexOf(animation.currFrame) % 4)];
+                    break;
+                case Direction.Idle:
+                    animation.currFrame = animation.frames[idleFrameIndex];
+                    break;
             }
-            else if (currDirection == "d")
-            {//animation.Update(gametime);
-                animation.currFrame = animation.frames[0 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Down frames
-            }
-            else if (currDirection == "l")
-            {//animation.Update(gametime);
-                animation.currFrame = animation.frames[4 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Left frames
-            }
-            else if (currDirection == "r")
-            {//animation.Update(gametime);
-                animation.currFrame = animation.frames[8 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Right frames
-
-            }
-            // bij idle/stilstaan moet laatste animatie worden ingenomen (de eerste frame daarvan)
-            else animation.currFrame = animation.frames[idleFrameIndex];
         }
 
         public void Draw(SpriteBatch spriteBatch)
