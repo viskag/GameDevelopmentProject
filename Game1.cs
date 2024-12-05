@@ -44,7 +44,7 @@ namespace GameDevelopmentProject
 
         private void InitializeGameObjects()
         {
-            hero = new Hero(heroTexture);
+            hero = new Hero(heroTexture, 66, 66);
         }
 
         protected override void Update(GameTime gameTime)

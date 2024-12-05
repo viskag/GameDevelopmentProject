@@ -6,128 +6,114 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace GameDevelopmentProject
 {
     internal class Hero : IGameObject
     {
-        public Hero(Texture2D texture)
+        public Hero(Texture2D texture, int fwidth, int fheight)
         {
             herotexture = texture;
             animation = new Animation.Animation();
 
-            // beweging Down frames
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 0, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 0, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 0, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 0, 66, 66)));
+            MakeAnimation(animation, fwidth, fheight);
 
-            // beweging Left frames
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 66, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 66, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 66, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 66, 66, 66)));
-
-            // beweging Right frames
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 132, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 132, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 132, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 132, 66, 66)));
-
-            // beweging Up frames
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(0, 198, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(66, 198, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(132, 198, 66, 66)));
-            animation.AddFrame(new Animation.AnimationFrame(new Rectangle(198, 198, 66, 66)));
-
-            // startpositie (center) en startdirection (down)
-            currDirection = "d";
+            currDirection = "d"; // startdirection (down) en startpositie (center)
             position = new Vector2(Game1.screenWidth/2-66/2, Game1.screenHeight/2-66/2);
+        }
+
+        private void MakeAnimation(Animation.Animation anim, int fwidth, int fheight)
+        {
+            int rows = 4; // rijen zijn de 4 richtingen
+            int columns = 4; // per richting 4 frames
+
+            for (int row = 0; row < rows; row++) // voor elke richting...
+            {
+                for (int col = 0; col < columns; col++) // ..elke frame toevoegen
+                {
+                    int x = col * fwidth; // x en y stellen de positie voor van waar de frame start
+                    int y = row * fheight; // dus 1 frame is richting/frame maal dimensies ve frame
+
+                    animation.AddFrame(new Animation.AnimationFrame(new Rectangle(x, y, fwidth, fheight)));
+                }
+            }
         }
 
         private Texture2D herotexture;
         Animation.Animation animation;
-        private Vector2 position;
         private string currDirection;
         private int idleFrameIndex;
-        int speed = 2;
+        private Vector2 position;
+        private Vector2 currSpeed;
+        private Vector2 walkSpeed = new Vector2(1,1);
+        private Vector2 maxSpeed = new Vector2(4,4);
+        private Vector2 acceleration = new Vector2(0.1f, 0.1f);
 
         public void Update(GameTime gametime)
         {animation.Update(gametime);//
 
-            // ophalen bewegingsinput
-            KeyboardState inputKey = Keyboard.GetState();
+            KeyboardState inputKey = Keyboard.GetState(); // ophalen bewegingsinput
 
-            // sprint en walk mechanic
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.Space)) // sprint en walk mechanic
             {
-                speed = 4; // sprintspeed
+                currSpeed = maxSpeed;
             }
-
-            // checken wat de input key is
-            if (inputKey.IsKeyDown(Keys.Up))
+            
+            if (inputKey.IsKeyDown(Keys.Up)) // checken wat de input key is
             {
-                position.Y -= speed; // ga naar boven
+                position.Y -= currSpeed.Y; // ga naar boven
                 currDirection = "u";
                 idleFrameIndex = 12; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Down))
             {
-                position.Y += speed; // ga naar beneden
+                position.Y += currSpeed.Y; // ga naar beneden
                 currDirection = "d";
                 idleFrameIndex = 0; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Left))
             {
-                position.X -= speed; // ga naar links
+                position.X -= currSpeed.X; // ga naar links
                 currDirection = "l";
                 idleFrameIndex = 4; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Right))
             {
-                position.X += speed; // ga naar rechts
+                position.X += currSpeed.X; // ga naar rechts
                 currDirection = "r";
                 idleFrameIndex = 8; // idle frame bijhouden
             }
-            else
-            {
-                currDirection = "i";
-            }
+            else currDirection = "i";
 
-            speed = 2; // terug op walkspeed zetten
+            currSpeed = walkSpeed; // terug op walkspeed zetten
 
-            // animation update
-            UpdateAnimation(gametime);
+            UpdateAnimation(gametime); // animation update
         }
+
         private void UpdateAnimation(GameTime gametime)
         {
             // animation update op huidig direction
             if (currDirection == "u")
-            {
-                //animation.Update(gametime);
+            {//animation.Update(gametime);
                 animation.currFrame = animation.frames[12 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Up frames
             }
             else if (currDirection == "d")
-            {
-                //animation.Update(gametime);
+            {//animation.Update(gametime);
                 animation.currFrame = animation.frames[0 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Down frames
             }
             else if (currDirection == "l")
-            {
-                //animation.Update(gametime);
+            {//animation.Update(gametime);
                 animation.currFrame = animation.frames[4 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Left frames
             }
             else if (currDirection == "r")
-            {
-                //animation.Update(gametime);
+            {//animation.Update(gametime);
                 animation.currFrame = animation.frames[8 + (animation.frames.IndexOf(animation.currFrame) % 4)]; // Right frames
 
             }
-            else
-            {
-                // bij idle/stilstaan moet laatste animatie worden ingenomen (de eerste frame daarvan)
-                animation.currFrame = animation.frames[idleFrameIndex];
-            }
+            // bij idle/stilstaan moet laatste animatie worden ingenomen (de eerste frame daarvan)
+            else animation.currFrame = animation.frames[idleFrameIndex];
         }
 
         public void Draw(SpriteBatch spriteBatch)
