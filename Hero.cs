@@ -58,6 +58,12 @@ namespace GameDevelopmentProject
             // ophalen bewegingsinput
             KeyboardState inputKey = Keyboard.GetState();
 
+            // sprint en walk mechanic
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                speed = 4; // sprintspeed
+            }
+
             // checken wat de input key is
             if (inputKey.IsKeyDown(Keys.Up))
             {
@@ -87,7 +93,8 @@ namespace GameDevelopmentProject
             {
                 currDirection = "i";
             }
-            
+
+            speed = 2; // terug op walkspeed zetten
 
             // animation update
             UpdateAnimation(gametime);
