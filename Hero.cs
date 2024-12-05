@@ -25,6 +25,8 @@ namespace GameDevelopmentProject
             herotexture = texture;
             animation = new Animation.Animation();
 
+            frameHeight = fheight;
+            frameWidth = fwidth;
             MakeAnimation(animation, fwidth, fheight);
 
             currDirection = startDirection; // startdirection (down) en startpositie (center)
@@ -51,6 +53,8 @@ namespace GameDevelopmentProject
         private Texture2D herotexture;
         private int idleFrameIndex;
         private Direction currDirection;
+        private int frameWidth;
+        private int frameHeight;
         Animation.Animation animation;
         private Vector2 position;
         private Vector2 currSpeed;
@@ -70,7 +74,7 @@ namespace GameDevelopmentProject
                 currDirection = Direction.Up;
                 idleFrameIndex = 12; // idle frame bijhouden
             }
-            else if (inputKey.IsKeyDown(Keys.Down) && position.Y + currSpeed.Y <= Game1.screenHeight)
+            else if (inputKey.IsKeyDown(Keys.Down) && position.Y + currSpeed.Y <= Game1.screenHeight - frameHeight)
             {
                 position.Y += currSpeed.Y; // ga naar beneden
                 currDirection = Direction.Down;
@@ -82,7 +86,7 @@ namespace GameDevelopmentProject
                 currDirection = Direction.Left;
                 idleFrameIndex = 4; // idle frame bijhouden
             }
-            else if (inputKey.IsKeyDown(Keys.Right) && position.Y + currSpeed.Y <= Game1.screenWidth)
+            else if (inputKey.IsKeyDown(Keys.Right) && position.X + currSpeed.X <= Game1.screenWidth - frameWidth)
             {
                 position.X += currSpeed.X; // ga naar rechts
                 currDirection = Direction.Right;
