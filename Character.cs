@@ -12,6 +12,14 @@ namespace GameDevelopmentProject
 {
     internal abstract class Character : IGameObject
     {
+        public enum Direction
+        {
+            Up,
+            Down,
+            Left,
+            Right,
+            Idle
+        }
         protected Texture2D texture;
         protected Animation.Animation animation;
         protected Vector2 position;

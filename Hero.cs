@@ -12,14 +12,6 @@ namespace GameDevelopmentProject
 {
     internal class Hero : Character
     {
-        public enum Direction
-        {
-            Up,
-            Down,
-            Left,
-            Right,
-            Idle
-        }
         public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection):base(texture, fwidth, fheight, startDirection)
         {
             walkSpeed = new Vector2(3, 3);
