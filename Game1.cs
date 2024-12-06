@@ -11,8 +11,8 @@ namespace GameDevelopmentProject
 
         private Texture2D heroTexture;
         Hero hero;
-        static public int screenWidth = 1280;//schermgrootte breedte
-        static public int screenHeight = 720;//schermgrootte hoogte
+        static public int screenWidth = 1600;//schermgrootte breedte
+        static public int screenHeight = 900;//schermgrootte hoogte
 
         public Game1()
         {
@@ -62,7 +62,7 @@ namespace GameDevelopmentProject
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.PowderBlue);
 
             // TODO: Add your drawing code here
 
