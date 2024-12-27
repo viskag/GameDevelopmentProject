@@ -12,70 +12,64 @@ namespace GameDevelopmentProject
 {
     internal class Hero : Character
     {
+        Vector2 decSpeed;
         public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection):base(texture, fwidth, fheight, startDirection)
         {
-            walkSpeed = new Vector2(3, 3);
-            maxSpeed = new Vector2(9, 9);
-            accSpeed = new Vector2(0.3f, 0.3f);
+            //walkSpeed = new Vector2(3, 3);
+            maxSpeed = new Vector2(6, 6);
+            accSpeed = new Vector2(0.1f, 0.1f);
+            decSpeed = new Vector2(0.05f, 0.05f);
             currSpeed = new Vector2(0, 0);
         }
 
         public override void Move(GameTime gameTime, KeyboardState inputKey)
         {
-            if (currSpeed.X > 0)
+            if (!inputKey.IsKeyDown(Keys.Up) && !inputKey.IsKeyDown(Keys.Down) && !inputKey.IsKeyDown(Keys.Left) && !inputKey.IsKeyDown(Keys.Right))
             {
-                currSpeed.X -= accSpeed.X;
-                if (currSpeed.X<0) currSpeed.X = 0;
-            }
-            else if (currSpeed.X < 0)
-            {
-                currSpeed.X += accSpeed.X;
-                if (currSpeed.X > 0) currSpeed.X = 0;
-            }
-            if (currSpeed.Y > 0)
-            {
-                currSpeed.Y -= accSpeed.Y;
-                if (currSpeed.Y<0) currSpeed.Y = 0;
-            }
-            else if (currSpeed.Y < 0)
-            {
-                currSpeed.Y += accSpeed.Y;
-                if(currSpeed.Y>0) currSpeed.Y = 0;
-            }
+                if (currSpeed.X > 0)
+                {
+                    currSpeed.X -= accSpeed.X; 
+                    if (currSpeed.X < 0) currSpeed.X = 0; 
+                }
+                else if (currSpeed.X < 0)
+                {
+                    currSpeed.X += accSpeed.X;
+                    if (currSpeed.X > 0) currSpeed.X = 0;
+                }
 
-            if (inputKey.IsKeyDown(Keys.Space) && currSpeed.X < maxSpeed.X && currSpeed.Y < maxSpeed.Y)
-            {
-                currSpeed += accSpeed * 2;
+                if (currSpeed.Y > 0)
+                {
+                    currSpeed.Y -= accSpeed.Y;
+                    if (currSpeed.Y < 0) currSpeed.Y = 0;
+                }
+                else if (currSpeed.Y < 0)
+                {
+                    currSpeed.Y += accSpeed.Y;
+                    if (currSpeed.Y > 0) currSpeed.Y = 0;
+                }
             }
             else
             {
-                // Regular acceleration when no space key is pressed
                 if (inputKey.IsKeyDown(Keys.Up) && currSpeed.Y < maxSpeed.Y)
                 {
-                    currSpeed.Y += accSpeed.Y; // Accelerate upwards
+                    currSpeed.Y += accSpeed.Y; //Acc up
                 }
                 else if (inputKey.IsKeyDown(Keys.Down) && currSpeed.Y < maxSpeed.Y)
                 {
-                    currSpeed.Y += accSpeed.Y; // Accelerate downwards
+                    currSpeed.Y += accSpeed.Y; //Acc down
                 }
 
                 if (inputKey.IsKeyDown(Keys.Left) && currSpeed.X < maxSpeed.X)
                 {
-                    currSpeed.X += accSpeed.X; // Accelerate left
+                    currSpeed.X += accSpeed.X; //Acc left
                 }
                 else if (inputKey.IsKeyDown(Keys.Right) && currSpeed.X < maxSpeed.X)
                 {
-                    currSpeed.X += accSpeed.X; // Accelerate right
+                    currSpeed.X += accSpeed.X; //Acc right
                 }
             }
-            if (currSpeed.X > maxSpeed.X)
-                currSpeed.X = maxSpeed.X;
-            if (currSpeed.Y > maxSpeed.Y)
-                currSpeed.Y = maxSpeed.Y;
-
-
-
-
+            if (currSpeed.X > maxSpeed.X) currSpeed.X = maxSpeed.X;
+            if (currSpeed.Y > maxSpeed.Y) currSpeed.Y = maxSpeed.Y;
 
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
