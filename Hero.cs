@@ -52,7 +52,7 @@ namespace GameDevelopmentProject
             {
                 if (inputKey.IsKeyDown(Keys.Up) && currSpeed.Y < maxSpeed.Y)
                 {
-                    currSpeed.Y += accSpeed.Y; //Acc up
+                    currSpeed.Y -= accSpeed.Y; //Acc up
                 }
                 else if (inputKey.IsKeyDown(Keys.Down) && currSpeed.Y < maxSpeed.Y)
                 {
@@ -61,7 +61,7 @@ namespace GameDevelopmentProject
 
                 if (inputKey.IsKeyDown(Keys.Left) && currSpeed.X < maxSpeed.X)
                 {
-                    currSpeed.X += accSpeed.X; //Acc left
+                    currSpeed.X -= accSpeed.X; //Acc left
                 }
                 else if (inputKey.IsKeyDown(Keys.Right) && currSpeed.X < maxSpeed.X)
                 {
@@ -70,34 +70,30 @@ namespace GameDevelopmentProject
             }
             if (currSpeed.X > maxSpeed.X) currSpeed.X = maxSpeed.X;
             if (currSpeed.Y > maxSpeed.Y) currSpeed.Y = maxSpeed.Y;
-            if (position.Y + currSpeed.Y <= Game1.screenHeight - frameHeight && position.X - currSpeed.X <= Game1.screenWidth - frameWidth)
-            {
-                position.X += currSpeed.X;
-                position.Y += currSpeed.Y;
-            }
-            
+            position.X += currSpeed.X;
+            position.Y += currSpeed.Y;
 
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
-                position.Y -= currSpeed.Y; // ga naar boven
+                //position.Y -= currSpeed.Y; // ga naar boven
                 currDirection = Direction.Up;
                 idleFrameIndex = 12; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Down) && position.Y + currSpeed.Y <= Game1.screenHeight - frameHeight)
             {
-                position.Y += currSpeed.Y; // ga naar beneden
+                //position.Y += currSpeed.Y; // ga naar beneden
                 currDirection = Direction.Down;
                 idleFrameIndex = 0; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Left) && position.X - currSpeed.X >= 0)
             {
-                position.X -= currSpeed.X; // ga naar links
+                //position.X -= currSpeed.X; // ga naar links
                 currDirection = Direction.Left;
                 idleFrameIndex = 4; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Right) && position.X + currSpeed.X <= Game1.screenWidth - frameWidth)
             {
-                position.X += currSpeed.X; // ga naar rechts
+                //position.X += currSpeed.X; // ga naar rechts
                 currDirection = Direction.Right;
                 idleFrameIndex = 8; // idle frame bijhouden
             }
