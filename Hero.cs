@@ -27,20 +27,55 @@ namespace GameDevelopmentProject
                 currSpeed.X -= accSpeed.X;
                 if (currSpeed.X<0) currSpeed.X = 0;
             }
+            else if (currSpeed.X < 0)
+            {
+                currSpeed.X += accSpeed.X;
+                if (currSpeed.X > 0) currSpeed.X = 0;
+            }
             if (currSpeed.Y > 0)
             {
                 currSpeed.Y -= accSpeed.Y;
                 if (currSpeed.Y<0) currSpeed.Y = 0;
             }
+            else if (currSpeed.Y < 0)
+            {
+                currSpeed.Y += accSpeed.Y;
+                if(currSpeed.Y>0) currSpeed.Y = 0;
+            }
 
             if (inputKey.IsKeyDown(Keys.Space) && currSpeed.X < maxSpeed.X && currSpeed.Y < maxSpeed.Y)
             {
-                currSpeed += accSpeed * 10;
+                currSpeed += accSpeed * 2;
             }
-            else if (currSpeed.X < walkSpeed.X && currSpeed.Y < walkSpeed.Y)
+            else
             {
-                currSpeed += accSpeed;
+                // Regular acceleration when no space key is pressed
+                if (inputKey.IsKeyDown(Keys.Up) && currSpeed.Y < maxSpeed.Y)
+                {
+                    currSpeed.Y += accSpeed.Y; // Accelerate upwards
+                }
+                else if (inputKey.IsKeyDown(Keys.Down) && currSpeed.Y < maxSpeed.Y)
+                {
+                    currSpeed.Y += accSpeed.Y; // Accelerate downwards
+                }
+
+                if (inputKey.IsKeyDown(Keys.Left) && currSpeed.X < maxSpeed.X)
+                {
+                    currSpeed.X += accSpeed.X; // Accelerate left
+                }
+                else if (inputKey.IsKeyDown(Keys.Right) && currSpeed.X < maxSpeed.X)
+                {
+                    currSpeed.X += accSpeed.X; // Accelerate right
+                }
             }
+            if (currSpeed.X > maxSpeed.X)
+                currSpeed.X = maxSpeed.X;
+            if (currSpeed.Y > maxSpeed.Y)
+                currSpeed.Y = maxSpeed.Y;
+
+
+
+
 
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
@@ -67,7 +102,7 @@ namespace GameDevelopmentProject
                 idleFrameIndex = 8; // idle frame bijhouden
             }
             else currDirection = Direction.Idle;
-            currSpeed = walkSpeed; // terug op walkspeed zetten
+            //currSpeed = walkSpeed; // terug op walkspeed zetten
         }
 
         public void Update(GameTime gametime)
