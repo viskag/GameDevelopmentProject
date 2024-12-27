@@ -23,12 +23,13 @@ namespace GameDevelopmentProject
         {
 
             Vector2 messageSize = font.MeasureString(message);
+            // startmessage centraal zetten
             Vector2 messagePosition = new Vector2(
                 (spriteBatch.GraphicsDevice.Viewport.Width - messageSize.X) / 2,
                 (spriteBatch.GraphicsDevice.Viewport.Height - messageSize.Y) / 2
             );
 
-            spriteBatch.DrawString(font, message, messagePosition, Color.White);
+            spriteBatch.DrawString(font, message, messagePosition, Color.Red);
         }
 
         public bool Update()
