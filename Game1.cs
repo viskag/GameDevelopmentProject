@@ -14,10 +14,14 @@ namespace GameDevelopmentProject
         static public int screenWidth = 1600;//schermgrootte breedte
         static public int screenHeight = 900;//schermgrootte hoogte
 
-        private Texture2D startScreenTexture;
+        private Texture2D startScreenTexture;//REMINDER: NIET VERGETEN TEXTURE TOEVOEGEN!
         private SpriteFont font;
-        private Startscreen startScreen;
+        private StartGamescreen startScreen;
         private bool running = false;
+
+        //REMINDER: OOK ZELFDE ZOALS HIERBOVEN, TEXTURE VOOR GAMEOVERSCREEN NIET VERGETEN!
+        private EndGamescreen endGameScreen;
+        private bool gameOver = false;
 
         public Game1()
         {
@@ -44,7 +48,8 @@ namespace GameDevelopmentProject
 
             heroTexture = Content.Load<Texture2D>("assangesprite");
             font = Content.Load<SpriteFont>("DefaultFont");
-            startScreen = new Startscreen(font);
+            startScreen = new StartGamescreen(font);
+            endGameScreen = new EndGamescreen(font);
 
             InitializeGameObjects();
         }
@@ -64,15 +69,31 @@ namespace GameDevelopmentProject
 
             if (!running)
             {
-                running = startScreen.Update(); // Check if the start screen should transition to the game
+                running = startScreen.Update();
+            }
+            else if (gameOver)
+            {
+                if (endGameScreen.Update())
+                {
+                    // reset gameover
+                    gameOver = false;
+
+                    // reset alle informatie
+                    // hero = new Hero();       // reset de hero
+                                                // nog andere resets die in te toekomst zullen komen
+                }
             }
             else
             {
-                hero.Update(gameTime); // Update the hero (start spel) if enter is clicked
-            }
-            //hero.Update(gameTime);
+                // continue...
+                hero.Update(gameTime);
 
-            base.Update(gameTime);
+                // tijdelijke testkey 'X' voor gameOver screen te tonen
+                if (Keyboard.GetState().IsKeyDown(Keys.X))
+                {
+                    gameOver = true; // Set game over state
+                }
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -86,6 +107,10 @@ namespace GameDevelopmentProject
             if (!running)
             {
                 startScreen.Draw(_spriteBatch);
+            }
+            else if (gameOver) 
+            {
+                endGameScreen.Draw(_spriteBatch);
             }
             else
             {

@@ -22,7 +22,7 @@ namespace GameDevelopmentProject
         }
         protected Texture2D texture;
         protected Animation.Animation animation;
-        protected Vector2 position;
+        public Vector2 position;
         protected Direction currDirection;
         protected int idleFrameIndex;
         protected int frameWidth;

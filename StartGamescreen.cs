@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentProject
 {
-    internal class Startscreen
+    internal class StartGamescreen
     {
         private Color backgroundColor = Color.CornflowerBlue;
         private string message = "Press Enter to Start";
         private SpriteFont font;
-        public Startscreen(SpriteFont spriteFont)
+        public StartGamescreen(SpriteFont spriteFont)
         {
             font = spriteFont;
         }
