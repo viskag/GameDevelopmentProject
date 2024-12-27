@@ -12,13 +12,10 @@ namespace GameDevelopmentProject
 {
     internal class Hero : Character
     {
-        Vector2 decSpeed;
         public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection):base(texture, fwidth, fheight, startDirection)
         {
-            //walkSpeed = new Vector2(3, 3);
             maxSpeed = new Vector2(6, 6);
             accSpeed = new Vector2(0.1f, 0.1f);
-            decSpeed = new Vector2(0.05f, 0.05f);
             currSpeed = new Vector2(0, 0);
         }
 
@@ -50,26 +47,28 @@ namespace GameDevelopmentProject
             }
             else
             {
-                if (inputKey.IsKeyDown(Keys.Up) && currSpeed.Y < maxSpeed.Y)
+                if (inputKey.IsKeyDown(Keys.Up))
                 {
                     currSpeed.Y -= accSpeed.Y; //Acc up
                 }
-                else if (inputKey.IsKeyDown(Keys.Down) && currSpeed.Y < maxSpeed.Y)
+                else if (inputKey.IsKeyDown(Keys.Down))
                 {
                     currSpeed.Y += accSpeed.Y; //Acc down
                 }
 
-                if (inputKey.IsKeyDown(Keys.Left) && currSpeed.X < maxSpeed.X)
+                if (inputKey.IsKeyDown(Keys.Left))
                 {
                     currSpeed.X -= accSpeed.X; //Acc left
                 }
-                else if (inputKey.IsKeyDown(Keys.Right) && currSpeed.X < maxSpeed.X)
+                else if (inputKey.IsKeyDown(Keys.Right))
                 {
                     currSpeed.X += accSpeed.X; //Acc right
                 }
             }
             if (currSpeed.X > maxSpeed.X) currSpeed.X = maxSpeed.X;
             if (currSpeed.Y > maxSpeed.Y) currSpeed.Y = maxSpeed.Y;
+            if (currSpeed.X < -maxSpeed.X) currSpeed.X = -maxSpeed.X;
+            if (currSpeed.Y < -maxSpeed.Y) currSpeed.Y= -maxSpeed.Y;
             position.X += currSpeed.X;
             position.Y += currSpeed.Y;
             if (position.X > Game1.screenWidth - frameWidth)
