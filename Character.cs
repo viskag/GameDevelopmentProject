@@ -30,6 +30,7 @@ namespace GameDevelopmentProject
         protected Vector2 currSpeed;
         protected Vector2 walkSpeed;
         protected Vector2 maxSpeed;
+        protected Vector2 accSpeed;
 
         public Character(Texture2D texture, int fwidth, int fheight, Direction startDirection)
         {

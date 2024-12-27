@@ -14,6 +14,11 @@ namespace GameDevelopmentProject
         static public int screenWidth = 1600;//schermgrootte breedte
         static public int screenHeight = 900;//schermgrootte hoogte
 
+        private Texture2D startScreenTexture;
+        private SpriteFont font;
+        private Startscreen startScreen;
+        private bool running = false;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -38,6 +43,8 @@ namespace GameDevelopmentProject
             // TODO: use this.Content to load your game content here
 
             heroTexture = Content.Load<Texture2D>("assangesprite");
+            font = Content.Load<SpriteFont>("DefaultFont");
+            startScreen = new Startscreen(font);
 
             InitializeGameObjects();
         }
@@ -55,7 +62,15 @@ namespace GameDevelopmentProject
 
             // TODO: Add your update logic here
 
-            hero.Update(gameTime);
+            if (!running)
+            {
+                running = startScreen.Update(); // Check if the start screen should transition to the game
+            }
+            else
+            {
+                hero.Update(gameTime); // Update the hero if the game has started
+            }
+            //hero.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -68,7 +83,16 @@ namespace GameDevelopmentProject
 
             _spriteBatch.Begin();
 
-            hero.Draw(_spriteBatch);
+            if (!running)
+            {
+                startScreen.Draw(_spriteBatch);
+            }
+            else
+            {
+                hero.Draw(_spriteBatch);
+            }
+
+            //hero.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

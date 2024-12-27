@@ -16,17 +16,25 @@ namespace GameDevelopmentProject
         {
             walkSpeed = new Vector2(3, 3);
             maxSpeed = new Vector2(9, 9);
+            accSpeed = new Vector2(0.3f, 0.3f);
+            currSpeed = new Vector2(0, 0);
         }
 
         public override void Move(GameTime gameTime, KeyboardState inputKey)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space)) // sprint en walk mechanic
+            if (inputKey.IsKeyDown(Keys.Space) && currSpeed.X < maxSpeed.X && currSpeed.Y < maxSpeed.Y)
             {
-                currSpeed = maxSpeed;
+                currSpeed *= 2; // accSpeed;
             }
+            else if (currSpeed.X < walkSpeed.X && currSpeed.Y < walkSpeed.Y)
+            {
+                currSpeed += accSpeed;
+            }
+
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
                 position.Y -= currSpeed.Y; // ga naar boven
+                currSpeed.Y += accSpeed.Y;
                 currDirection = Direction.Up;
                 idleFrameIndex = 12; // idle frame bijhouden
             }
