@@ -74,6 +74,8 @@ namespace GameDevelopmentProject
             position.Y += currSpeed.Y;
             if (position.X > Game1.screenWidth - frameWidth) position.X = Game1.screenWidth - frameWidth;
             if (position.Y > Game1.screenHeight - frameHeight) position.Y = Game1.screenHeight - frameHeight;
+            if (position.X < 0) position.X = 0;
+            if (position.Y < 0) position.Y = 0;
 
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
