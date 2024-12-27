@@ -22,9 +22,20 @@ namespace GameDevelopmentProject
 
         public override void Move(GameTime gameTime, KeyboardState inputKey)
         {
+            if (currSpeed.X > 0)
+            {
+                currSpeed.X -= accSpeed.X;
+                if (currSpeed.X<0) currSpeed.X = 0;
+            }
+            if (currSpeed.Y > 0)
+            {
+                currSpeed.Y -= accSpeed.Y;
+                if (currSpeed.Y<0) currSpeed.Y = 0;
+            }
+
             if (inputKey.IsKeyDown(Keys.Space) && currSpeed.X < maxSpeed.X && currSpeed.Y < maxSpeed.Y)
             {
-                currSpeed *= 2; // accSpeed;
+                currSpeed += accSpeed * 10;
             }
             else if (currSpeed.X < walkSpeed.X && currSpeed.Y < walkSpeed.Y)
             {
@@ -34,7 +45,6 @@ namespace GameDevelopmentProject
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
                 position.Y -= currSpeed.Y; // ga naar boven
-                currSpeed.Y += accSpeed.Y;
                 currDirection = Direction.Up;
                 idleFrameIndex = 12; // idle frame bijhouden
             }
