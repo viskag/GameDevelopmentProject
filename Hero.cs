@@ -70,6 +70,12 @@ namespace GameDevelopmentProject
             }
             if (currSpeed.X > maxSpeed.X) currSpeed.X = maxSpeed.X;
             if (currSpeed.Y > maxSpeed.Y) currSpeed.Y = maxSpeed.Y;
+            if (position.Y + currSpeed.Y <= Game1.screenHeight - frameHeight && position.X - currSpeed.X <= Game1.screenWidth - frameWidth)
+            {
+                position.X += currSpeed.X;
+                position.Y += currSpeed.Y;
+            }
+            
 
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
             {
