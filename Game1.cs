@@ -68,7 +68,7 @@ namespace GameDevelopmentProject
             }
             else
             {
-                hero.Update(gameTime); // Update the hero if the game has started
+                hero.Update(gameTime); // Update the hero (start spel) if enter is clicked
             }
             //hero.Update(gameTime);
 
