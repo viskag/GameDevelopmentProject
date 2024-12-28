@@ -23,6 +23,9 @@ namespace GameDevelopmentProject
         private EndGamescreen endGameScreen;
         private bool gameOver = false;
 
+        private Texture2D coinTexture;
+        private Coin coin;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -47,6 +50,8 @@ namespace GameDevelopmentProject
             // TODO: use this.Content to load your game content here
 
             heroTexture = Content.Load<Texture2D>("assangesprite");
+            coinTexture = Content.Load<Texture2D>("./Elements/G3");
+
             font = Content.Load<SpriteFont>("DefaultFont");
             startScreen = new StartGamescreen(font);
             endGameScreen = new EndGamescreen(font);
@@ -57,6 +62,7 @@ namespace GameDevelopmentProject
         private void InitializeGameObjects()
         {
             hero = new Hero(heroTexture, 66, 66, Hero.Direction.Down);
+            coin = new Coin(coinTexture, Vector2.One, 33, 33);
         }
 
         protected override void Update(GameTime gameTime)
@@ -88,6 +94,8 @@ namespace GameDevelopmentProject
                 // continue...
                 hero.Update(gameTime);
 
+                coin.Update(gameTime);
+
                 // tijdelijke testkey 'X' voor gameOver screen te tonen
                 if (Keyboard.GetState().IsKeyDown(Keys.X))
                 {
@@ -115,6 +123,8 @@ namespace GameDevelopmentProject
             else
             {
                 hero.Draw(_spriteBatch);
+
+                coin.Draw(_spriteBatch);
             }
 
             //hero.Draw(_spriteBatch);
