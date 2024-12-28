@@ -10,7 +10,8 @@ namespace GameDevelopmentProject
         private SpriteBatch _spriteBatch;
 
         private Texture2D heroTexture;
-        Hero hero;
+        private Hero hero;
+
         static public int screenWidth = 1600;
         static public int screenHeight = 900;
 
@@ -25,6 +26,9 @@ namespace GameDevelopmentProject
 
         private Texture2D coinTexture;
         private Coin coin;
+
+        private Texture2D civTexture;
+        private Civilian civ;
 
         public Game1()
         {
@@ -51,6 +55,7 @@ namespace GameDevelopmentProject
 
             heroTexture = Content.Load<Texture2D>("assangesprite");
             coinTexture = Content.Load<Texture2D>("./Elements/G3");
+            civTexture = Content.Load<Texture2D>("npc");
 
             font = Content.Load<SpriteFont>("DefaultFont");
             startScreen = new StartGamescreen(font);
@@ -63,6 +68,7 @@ namespace GameDevelopmentProject
         {
             hero = new Hero(heroTexture, 66, 66, Hero.Direction.Down);
             coin = new Coin(coinTexture, Vector2.Zero, 64, 64);
+            civ = new Civilian(civTexture, 66, 66, Hero.Direction.Down, 0, hero);
         }
 
         protected override void Update(GameTime gameTime)
@@ -93,6 +99,8 @@ namespace GameDevelopmentProject
             {
                 // continue...
                 hero.Update(gameTime);
+                
+                civ.Update(gameTime);
 
                 if (coin != null) coin.Update(gameTime);
 
@@ -130,6 +138,8 @@ namespace GameDevelopmentProject
                 if (coin != null) coin.Draw(_spriteBatch);
 
                 hero.Draw(_spriteBatch);
+
+                civ.Draw(_spriteBatch);
             }
 
             //hero.Draw(_spriteBatch);
