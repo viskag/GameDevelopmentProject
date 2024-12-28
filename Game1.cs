@@ -62,7 +62,7 @@ namespace GameDevelopmentProject
         private void InitializeGameObjects()
         {
             hero = new Hero(heroTexture, 66, 66, Hero.Direction.Down);
-            coin = new Coin(coinTexture, Vector2.One, 33, 33);
+            coin = new Coin(coinTexture, new Vector2(10,20), 33, 33);
         }
 
         protected override void Update(GameTime gameTime)
@@ -96,6 +96,11 @@ namespace GameDevelopmentProject
 
                 coin.Update(gameTime);
 
+                if (Vector2.Distance(new Vector2(coin.Position.X + coin.Radius), hero.GetCenter()) < coin.Radius)
+                {
+                    coin = null;
+                }
+
                 // tijdelijke testkey 'X' voor gameOver screen te tonen
                 if (Keyboard.GetState().IsKeyDown(Keys.X))
                 {
@@ -124,7 +129,7 @@ namespace GameDevelopmentProject
             {
                 hero.Draw(_spriteBatch);
 
-                coin.Draw(_spriteBatch);
+                if (coin != null) coin.Draw(_spriteBatch);
             }
 
             //hero.Draw(_spriteBatch);

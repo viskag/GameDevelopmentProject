@@ -152,5 +152,10 @@ namespace GameDevelopmentProject
                     break;
             }
         }
+
+        public Vector2 GetCenter() // centrum coordinaten van de held
+        {
+            return new Vector2(position.X + frameWidth / 2f, position.Y + frameHeight / 2f);
+        }
     }
 }
