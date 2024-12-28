@@ -62,7 +62,7 @@ namespace GameDevelopmentProject
         private void InitializeGameObjects()
         {
             hero = new Hero(heroTexture, 66, 66, Hero.Direction.Down);
-            coin = new Coin(coinTexture, new Vector2(10,20), 33, 33);
+            coin = new Coin(coinTexture, Vector2.Zero, 64, 64);
         }
 
         protected override void Update(GameTime gameTime)
@@ -96,7 +96,7 @@ namespace GameDevelopmentProject
 
                 if (coin != null) coin.Update(gameTime);
 
-                if (coin != null && Vector2.Distance(new Vector2(coin.Position.X + coin.Radius), hero.GetCenter()) < coin.Radius)
+                if (coin != null && Vector2.Distance(coin.Position, hero.GetCenter()) <= coin.Radius * 2)
                 {
                     coin = null;
                 }
@@ -127,9 +127,9 @@ namespace GameDevelopmentProject
             }
             else
             {
-                hero.Draw(_spriteBatch);
-
                 if (coin != null) coin.Draw(_spriteBatch);
+
+                hero.Draw(_spriteBatch);
             }
 
             //hero.Draw(_spriteBatch);
