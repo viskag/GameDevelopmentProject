@@ -29,6 +29,7 @@ namespace GameDevelopmentProject
 
         private Texture2D civTexture;
         private Civilian civ;
+        private Civilian civ2;
 
         public Game1()
         {
@@ -69,6 +70,9 @@ namespace GameDevelopmentProject
             hero = new Hero(heroTexture, 66, 66, Hero.Direction.Down);
             coin = new Coin(coinTexture, Vector2.Zero, 64, 64);
             civ = new Civilian(civTexture, 66, 66, Hero.Direction.Down, 0, hero);
+            civ.position = new Vector2(30);
+            civ2 = new Civilian(civTexture, 64, 64,Hero.Direction.Down, 1, hero);
+            civ2.position = new Vector2(60);
         }
 
         protected override void Update(GameTime gameTime)
@@ -100,7 +104,7 @@ namespace GameDevelopmentProject
                 // continue...
                 hero.Update(gameTime);
                 
-                civ.Update(gameTime);
+                civ.Update(gameTime); civ2.Update(gameTime);
 
                 if (coin != null) coin.Update(gameTime);
 
@@ -139,7 +143,7 @@ namespace GameDevelopmentProject
 
                 hero.Draw(_spriteBatch);
 
-                civ.Draw(_spriteBatch);
+                civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch);
             }
 
             //hero.Draw(_spriteBatch);
