@@ -49,20 +49,20 @@ namespace GameDevelopmentProject
             {
                 if (inputKey.IsKeyDown(Keys.Up))
                 {
-                    currSpeed.Y -= accSpeed.Y; //Acc up
+                    currSpeed.Y -= accSpeed.Y;
                 }
                 else if (inputKey.IsKeyDown(Keys.Down))
                 {
-                    currSpeed.Y += accSpeed.Y; //Acc down
+                    currSpeed.Y += accSpeed.Y;
                 }
 
                 if (inputKey.IsKeyDown(Keys.Left))
                 {
-                    currSpeed.X -= accSpeed.X; //Acc left
+                    currSpeed.X -= accSpeed.X;
                 }
                 else if (inputKey.IsKeyDown(Keys.Right))
                 {
-                    currSpeed.X += accSpeed.X; //Acc right
+                    currSpeed.X += accSpeed.X;
                 }
             }
             if (currSpeed.X > maxSpeed.X) currSpeed.X = maxSpeed.X;
@@ -92,7 +92,7 @@ namespace GameDevelopmentProject
                 currSpeed.Y = 0;
             }
 
-            if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0) // checken wat de input key is
+            if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0)
             {
                 //position.Y -= currSpeed.Y; // ga naar boven
                 currDirection = Direction.Up;

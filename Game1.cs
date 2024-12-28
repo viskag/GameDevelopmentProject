@@ -11,8 +11,8 @@ namespace GameDevelopmentProject
 
         private Texture2D heroTexture;
         Hero hero;
-        static public int screenWidth = 1600;//schermgrootte breedte
-        static public int screenHeight = 900;//schermgrootte hoogte
+        static public int screenWidth = 1600;
+        static public int screenHeight = 900;
 
         private Texture2D startScreenTexture;//REMINDER: NIET VERGETEN TEXTURE TOEVOEGEN!
         private SpriteFont font;
