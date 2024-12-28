@@ -94,9 +94,9 @@ namespace GameDevelopmentProject
                 // continue...
                 hero.Update(gameTime);
 
-                coin.Update(gameTime);
+                if (coin != null) coin.Update(gameTime);
 
-                if (Vector2.Distance(new Vector2(coin.Position.X + coin.Radius), hero.GetCenter()) < coin.Radius)
+                if (coin != null && Vector2.Distance(new Vector2(coin.Position.X + coin.Radius), hero.GetCenter()) < coin.Radius)
                 {
                     coin = null;
                 }
