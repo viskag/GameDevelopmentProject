@@ -22,26 +22,17 @@ namespace GameDevelopmentProject
 
         public override void Move(GameTime gameTime, KeyboardState input)
         {
+            Vector2 directionHero = hero.GetCenter() - this.position;
+            float distanceHero = directionHero.Length();
+            directionHero.Normalize();
             if (aiVersion == 0)
             {
-                Vector2 directionHero = hero.GetCenter() - this.position;
-                directionHero.Normalize();
                 this.position += directionHero * 2f;
-                if (Math.Abs(directionHero.X) > Math.Abs(directionHero.Y))
-                {
-                    if (directionHero.X < 0) currDirection = Direction.Left;
-                    else currDirection = Direction.Right;
-                }
-                else if (directionHero.Y < 0) currDirection= Direction.Up;
-                else currDirection = Direction.Down;
             }
             else if (aiVersion == 1)
             {
-                Vector2 directionHero = hero.GetCenter() - this.position;
-                float distanceHero = directionHero.Length();
                 if (distanceHero > 500)
                 {
-                    directionHero.Normalize();
                     this.position += directionHero * 2f;
                 }
             }
@@ -49,6 +40,16 @@ namespace GameDevelopmentProject
             {
                 //geen beweging, stilstaan op plaats
             }
+
+            if (Math.Abs(directionHero.X) > Math.Abs(directionHero.Y))
+            {
+                if (directionHero.X < 0) currDirection = Direction.Left;
+                else currDirection = Direction.Right;
+            }
+            else if (directionHero.Y < 0) currDirection = Direction.Up;
+            else currDirection = Direction.Down;
+
+            if (aiVersion >= 1 && distanceHero <= 500) currDirection = Direction.Idle;
         }
         public void Update(GameTime gameTime)
         {
