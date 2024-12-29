@@ -27,9 +27,12 @@ namespace GameDevelopmentProject
                 Vector2 directionHero = hero.GetCenter() - this.position;
                 directionHero.Normalize();
                 this.position += directionHero * 2f;
-                if (directionHero.X < 0) currDirection = Direction.Left;
-                else currDirection = Direction.Right;
-                if (directionHero.Y < 0) currDirection = Direction.Up;
+                if (Math.Abs(directionHero.X) > Math.Abs(directionHero.Y))
+                {
+                    if (directionHero.X < 0) currDirection = Direction.Left;
+                    else currDirection = Direction.Right;
+                }
+                else if (directionHero.Y < 0) currDirection= Direction.Up;
                 else currDirection = Direction.Down;
             }
             else if (aiVersion == 1)

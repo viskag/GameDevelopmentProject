@@ -30,6 +30,7 @@ namespace GameDevelopmentProject
         private Texture2D civTexture;
         private Civilian civ;
         private Civilian civ2;
+        private Civilian civ3;
 
         public Game1()
         {
@@ -67,12 +68,14 @@ namespace GameDevelopmentProject
 
         private void InitializeGameObjects()
         {
-            hero = new Hero(heroTexture, 66, 66, Hero.Direction.Down);
+            hero = new Hero(heroTexture, 66, 66, Character.Direction.Down);
             coin = new Coin(coinTexture, Vector2.Zero, 64, 64);
-            civ = new Civilian(civTexture, 66, 66, Hero.Direction.Down, 0, hero);
+            civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
             civ.position = new Vector2(30);
-            civ2 = new Civilian(civTexture, 64, 64,Hero.Direction.Down, 1, hero);
+            civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
             civ2.position = new Vector2(60);
+            civ3 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 2, hero);
+            civ3.position = new Vector2(600);
         }
 
         protected override void Update(GameTime gameTime)
@@ -104,7 +107,7 @@ namespace GameDevelopmentProject
                 // continue...
                 hero.Update(gameTime);
                 
-                civ.Update(gameTime); civ2.Update(gameTime);
+                civ.Update(gameTime); civ2.Update(gameTime); civ3?.Update(gameTime);
 
                 if (coin != null) coin.Update(gameTime);
 
@@ -143,7 +146,7 @@ namespace GameDevelopmentProject
 
                 hero.Draw(_spriteBatch);
 
-                civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch);
+                civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch); civ3.Draw(_spriteBatch);
             }
 
             //hero.Draw(_spriteBatch);
