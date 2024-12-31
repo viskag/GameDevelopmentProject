@@ -14,9 +14,9 @@ namespace GameDevelopmentProject
         public Vector2 Position { get; private set; }
         private int width;
         private int height;
-        public Coin(Texture2D texture, Vector2 position, int width, int height)
+        public Coin(Texture2D ctexture, Vector2 position, int width, int height)
         {
-            this.texture = texture;
+            this.texture = ctexture;
             this.Position = position;
             this.width = width;
             this.height = height;

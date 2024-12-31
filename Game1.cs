@@ -38,6 +38,7 @@ namespace GameDevelopmentProject
         private Civilian civ3;
 
         private List<Level> levels = new List<Level>();
+        private int currLevel = 0;
 
         public Game1()
         {
@@ -71,22 +72,22 @@ namespace GameDevelopmentProject
             startScreen = new StartGamescreen(font);
             endGameScreen = new EndGamescreen(font);
 
-            levels.Add(new Level(coinTexture, 5, 6, hero));
-            levels.Add(new Level(coinTexture, 10, 10, hero));
-
             InitializeGameObjects();
         }
 
         private void InitializeGameObjects()
         {
             hero = new Hero(heroTexture, 66, 66, Character.Direction.Down);
-            coin = new Coin(coinTexture, new Vector2(500, 500), 64, 64);
+            //coin = new Coin(coinTexture, new Vector2(500, 500), 64, 64);
             civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
             civ.position = new Vector2(30);
             civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
             civ2.position = new Vector2(60);
             civ3 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 2, hero);
             civ3.position = new Vector2(600);
+
+            levels.Add(new Level(coinTexture, 5, 6, hero));
+            levels.Add(new Level(coinTexture, 10, 10, hero));
         }
 
         protected override void Update(GameTime gameTime)
@@ -120,12 +121,14 @@ namespace GameDevelopmentProject
                 
                 civ.Update(gameTime); civ2.Update(gameTime); civ3?.Update(gameTime);
 
-                if (coin != null) coin.Update(gameTime);
+                levels[currLevel].Update(gameTime);
 
-                if (coin != null && Vector2.Distance(coin.GetCenter(), hero.GetCenter()) <= coin.Radius)
-                {
-                    coin = null;
-                }
+                //if (coin != null) coin.Update(gameTime);
+
+                //if (coin != null && Vector2.Distance(coin.GetCenter(), hero.GetCenter()) <= coin.Radius)
+                //{
+                //    coin = null;
+                //}
 
                 // tijdelijke testkey 'X' voor gameOver screen te tonen
                 if (Keyboard.GetState().IsKeyDown(Keys.X))
@@ -155,7 +158,9 @@ namespace GameDevelopmentProject
             }
             else
             {
-                if (coin != null) coin.Draw(_spriteBatch);
+                //if (coin != null) coin.Draw(_spriteBatch);
+
+                levels[currLevel].Draw(_spriteBatch);
 
                 hero.Draw(_spriteBatch);
 
