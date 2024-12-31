@@ -34,6 +34,11 @@ namespace GameDevelopmentProject
             spriteBatch.Draw(texture, Position, Color.White);
         }
 
+        public Vector2 GetCenter()
+        {
+            return new Vector2(Position.X + width / 2f, Position.Y + height / 2f);
+        }
+
         public void Update(GameTime gametime)
         {
 

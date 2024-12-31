@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 //using SharpDX.Direct2D1;
+//using SharpDX.Direct2D1;
 
 namespace GameDevelopmentProject
 {
@@ -73,7 +74,7 @@ namespace GameDevelopmentProject
         private void InitializeGameObjects()
         {
             hero = new Hero(heroTexture, 66, 66, Character.Direction.Down);
-            coin = new Coin(coinTexture, Vector2.Zero, 64, 64);
+            coin = new Coin(coinTexture, new Vector2(500, 500), 64, 64);
             civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
             civ.position = new Vector2(30);
             civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
@@ -115,7 +116,7 @@ namespace GameDevelopmentProject
 
                 if (coin != null) coin.Update(gameTime);
 
-                if (coin != null && Vector2.Distance(coin.Position, hero.GetCenter()) <= coin.Radius * 2)
+                if (coin != null && Vector2.Distance(coin.GetCenter(), hero.GetCenter()) <= coin.Radius)
                 {
                     coin = null;
                 }
@@ -156,6 +157,7 @@ namespace GameDevelopmentProject
             }
 
             //hero.Draw(_spriteBatch);
+            _spriteBatch.DrawString(font, $"Levens: {hero.lives}", new Vector2(10, 10), Color.Green);
 
             _spriteBatch.End();
 

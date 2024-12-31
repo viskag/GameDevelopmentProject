@@ -12,7 +12,8 @@ namespace GameDevelopmentProject
 {
     internal class Hero : Character
     {
-        public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection):base(texture, fwidth, fheight, startDirection)
+        public int lives = 3;
+        public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection) : base(texture, fwidth, fheight, startDirection)
         {
             maxSpeed = new Vector2(6, 6);
             accSpeed = new Vector2(0.1f, 0.1f);
@@ -25,8 +26,8 @@ namespace GameDevelopmentProject
             {
                 if (currSpeed.X > 0)
                 {
-                    currSpeed.X -= accSpeed.X; 
-                    if (currSpeed.X < 0) currSpeed.X = 0; 
+                    currSpeed.X -= accSpeed.X;
+                    if (currSpeed.X < 0) currSpeed.X = 0;
                 }
                 else if (currSpeed.X < 0)
                 {
@@ -68,16 +69,16 @@ namespace GameDevelopmentProject
             if (currSpeed.X > maxSpeed.X) currSpeed.X = maxSpeed.X;
             if (currSpeed.Y > maxSpeed.Y) currSpeed.Y = maxSpeed.Y;
             if (currSpeed.X < -maxSpeed.X) currSpeed.X = -maxSpeed.X;
-            if (currSpeed.Y < -maxSpeed.Y) currSpeed.Y= -maxSpeed.Y;
+            if (currSpeed.Y < -maxSpeed.Y) currSpeed.Y = -maxSpeed.Y;
             position.X += currSpeed.X;
             position.Y += currSpeed.Y;
             if (position.X > Game1.screenWidth - frameWidth)
             {
-                position.X = Game1.screenWidth - frameWidth; 
+                position.X = Game1.screenWidth - frameWidth;
                 currSpeed.X = 0;
             }
-            if (position.Y > Game1.screenHeight - frameHeight) 
-            { 
+            if (position.Y > Game1.screenHeight - frameHeight)
+            {
                 position.Y = Game1.screenHeight - frameHeight;
                 currSpeed.Y = 0;
             }
@@ -156,6 +157,11 @@ namespace GameDevelopmentProject
         public Vector2 GetCenter() // centrum coordinaten van de held
         {
             return new Vector2(position.X + frameWidth / 2f, position.Y + frameHeight / 2f);
+        }
+        public void loseLive()
+        {
+            if (lives > 0) lives--;
+            else lives = 0; // else game over method oproepen
         }
     }
 }
