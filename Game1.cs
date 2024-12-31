@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 //using SharpDX.Direct2D1;
 //using SharpDX.Direct2D1;
 
@@ -36,6 +37,8 @@ namespace GameDevelopmentProject
         private Civilian civ2;
         private Civilian civ3;
 
+        private List<Level> levels = new List<Level>();
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -67,6 +70,9 @@ namespace GameDevelopmentProject
             font = Content.Load<SpriteFont>("DefaultFont");
             startScreen = new StartGamescreen(font);
             endGameScreen = new EndGamescreen(font);
+
+            levels.Add(new Level(coinTexture, 5, 6, hero));
+            levels.Add(new Level(coinTexture, 10, 10, hero));
 
             InitializeGameObjects();
         }

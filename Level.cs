@@ -15,10 +15,12 @@ namespace GameDevelopmentProject
         public static int id = 0;
         public Hero hero;
         public List<Coin> coins = new List<Coin>();
-        public Level(int civilianCount, int coinCount, Hero hero)
+        private Texture2D coinTexture;
+        public Level(Texture2D ctexture, int civilianCount, int coinCount, Hero hero)
         {
             id += 1;
             LevelSetup(coinCount);
+            coinTexture = ctexture;
         }
         public void LevelSetup(int count)
         {
@@ -28,7 +30,7 @@ namespace GameDevelopmentProject
         {
             for (int i = 0; i < count; i++)
             {
-                //coins.Add(new Coin(null, new Vector2(rng.Next(10, 1200)), 64, 64));
+                coins.Add(new Coin(coinTexture, new Vector2(rng.Next(10, 1200)), 64, 64));
             }
         }
         public bool AllCollected()

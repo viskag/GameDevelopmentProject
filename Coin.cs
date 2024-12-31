@@ -11,7 +11,7 @@ namespace GameDevelopmentProject
     internal class Coin : IGameObject
     {
         private Texture2D texture;
-        public Vector2 Position { get; }
+        public Vector2 Position { get; private set; }
         private int width;
         private int height;
         public Coin(Texture2D texture, Vector2 position, int width, int height)
