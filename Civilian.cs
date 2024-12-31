@@ -50,6 +50,7 @@ namespace GameDevelopmentProject
             else currDirection = Direction.Down;
 
             if (aiVersion >= 1 && distanceHero <= 500) currDirection = Direction.Idle;
+            // maak een aparte methode updateDirection waar je gemakkelijk directionHero kan meegeven
         }
         public void Update(GameTime gameTime)
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+//using SharpDX.Direct2D1;
 
 namespace GameDevelopmentProject
 {
@@ -8,6 +9,8 @@ namespace GameDevelopmentProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private Texture2D backgroundTexture;
 
         private Texture2D heroTexture;
         private Hero hero;
@@ -58,6 +61,7 @@ namespace GameDevelopmentProject
             heroTexture = Content.Load<Texture2D>("assangesprite");
             coinTexture = Content.Load<Texture2D>("./Elements/G3");
             civTexture = Content.Load<Texture2D>("npc");
+            backgroundTexture = Content.Load<Texture2D>("ice");
 
             font = Content.Load<SpriteFont>("DefaultFont");
             startScreen = new StartGamescreen(font);
@@ -131,6 +135,8 @@ namespace GameDevelopmentProject
             // TODO: Add your drawing code here
 
             _spriteBatch.Begin();
+
+            _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
 
             if (!running)
             {
