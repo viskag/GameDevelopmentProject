@@ -14,7 +14,7 @@ namespace GameDevelopmentProject
         public static Random rng = new Random();
         public static int id = 0;
         public Hero hero;
-        private CoinManager coinManager;
+        public CoinManager coinManager;
         public int coinCount;
         public Level(Texture2D ctexture, int civilianCount, int coinCount, Hero hero)
         {

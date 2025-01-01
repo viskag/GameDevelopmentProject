@@ -10,7 +10,7 @@ namespace GameDevelopmentProject
 {
     internal class CoinManager
     {
-        private List<Coin> coins;
+        public List<Coin> coins;
         private static Random rng = new Random();
         public Texture2D coinTexture;
 
@@ -24,7 +24,7 @@ namespace GameDevelopmentProject
         {
             for (int i = 0; i < coinCount; i++)
             {
-                Vector2 position = new Vector2(rng.Next(64, screenWidth - 64), rng.Next(64, screenHeight - 64));
+                Vector2 position = new Vector2(rng.Next(64, screenHeight - 64), rng.Next(64, screenWidth - 64));
 
                 Coin coin = new Coin(coinTexture, position, 64, 64);
 
