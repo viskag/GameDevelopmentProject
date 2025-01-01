@@ -40,6 +40,8 @@ namespace GameDevelopmentProject
         private List<Level> levels = new List<Level>();
         private int currLevel = 0;
 
+        private GameState gameState;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -88,54 +90,28 @@ namespace GameDevelopmentProject
 
             levels.Add(new Level(coinTexture, 5, 6, hero));
             levels.Add(new Level(coinTexture, 10, 10, hero));
+
+            gameState = new GameState(font);
         }
 
         protected override void Update(GameTime gameTime)
         {
+            gameState.Update();
+
+            if (!gameState.IsRunning) return;
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
 
-            if (!running)
-            {
-                running = startScreen.Update();
-            }
-            else if (gameOver)
-            {
-                if (endGameScreen.Update())
-                {
-                    // reset gameover
-                    gameOver = false;
+            hero.Update(gameTime);
 
-                    // reset alle informatie
-                    // hero = new Hero();       // reset de hero
-                                                // nog andere resets die in te toekomst zullen komen
-                }
-            }
-            else
-            {
-                // continue...
-                hero.Update(gameTime);
-                
-                civ.Update(gameTime); civ2.Update(gameTime); civ3?.Update(gameTime);
+            civ.Update(gameTime); civ2.Update(gameTime); civ3?.Update(gameTime);
 
-                levels[currLevel].Update(gameTime);
+            levels[currLevel].Update(gameTime);
 
-                //if (coin != null) coin.Update(gameTime);
-
-                //if (coin != null && Vector2.Distance(coin.GetCenter(), hero.GetCenter()) <= coin.Radius)
-                //{
-                //    coin = null;
-                //}
-
-                // tijdelijke testkey 'X' voor gameOver screen te tonen
-                if (Keyboard.GetState().IsKeyDown(Keys.X))
-                {
-                    gameOver = true; // Set game over state
-                }
-            }
+            if (Keyboard.GetState().IsKeyDown(Keys.X)) gameState.EndGame();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -148,17 +124,9 @@ namespace GameDevelopmentProject
 
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
 
-            if (!running)
+            gameState.Draw(_spriteBatch);
+            if (gameState.IsRunning)
             {
-                startScreen.Draw(_spriteBatch);
-            }
-            else if (gameOver) 
-            {
-                endGameScreen.Draw(_spriteBatch);
-            }
-            else
-            {
-                //if (coin != null) coin.Draw(_spriteBatch);
 
                 levels[currLevel].Draw(_spriteBatch);
 
@@ -167,7 +135,6 @@ namespace GameDevelopmentProject
                 civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch); civ3.Draw(_spriteBatch);
             }
 
-            //hero.Draw(_spriteBatch);
             _spriteBatch.DrawString(font, $"Levens: {hero.lives}", new Vector2(10, 10), Color.Green);
 
             _spriteBatch.End();
