@@ -14,50 +14,33 @@ namespace GameDevelopmentProject
         public static Random rng = new Random();
         public static int id = 0;
         public Hero hero;
-        public List<Coin> coins = new List<Coin>();
-        public Texture2D coinTexture;
+        private CoinManager coinManager;
+        public int coinCount;
         public Level(Texture2D ctexture, int civilianCount, int coinCount, Hero hero)
         {
             id += 1;
             this.hero = hero;
-            coinTexture = ctexture;
+            coinManager = new CoinManager(ctexture);
+            this.coinCount = coinCount;
             LevelSetup(coinCount);
         }
         public void LevelSetup(int count)
         {
-            PlaceCoins(count);
-        }
-        private void PlaceCoins(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                coins.Add(new Coin(coinTexture, new Vector2(rng.Next(40, 1200), rng.Next(40, 900)), 64, 64));
-            }
+            coinManager.ScatterCoins(coinCount, Game1.screenHeight, Game1.screenWidth);
         }
         public bool AllCollected()
         {
-            return coins.Count == 0;
+            return coinManager.AllCollected();
         }
 
         public void Update(GameTime gametime)
         {
-            for (int i = 0; i < coins.Count; i++)
-            {
-                if (coins[i] != null) coins[i].Update(gametime);
-
-                if (coins[i] != null && Vector2.Distance(coins[i].GetCenter(), hero.GetCenter()) <= coins[i].Radius)
-                {
-                    coins.Remove(coins[i]);
-                }
-            }
+            coinManager.Update(gametime, hero);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Coin coin in coins)
-            {
-                coin.Draw(spriteBatch);
-            }
+            coinManager.Draw(spriteBatch);
         }
     }
 }
