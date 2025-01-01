@@ -23,11 +23,9 @@ namespace GameDevelopmentProject
         public void StartGame()
         {
             IsRunning = true;
-            IsGameOver = false;
         }
         public void EndGame()
         {
-            IsRunning = false;
             IsGameOver = true;
         }
         public void ResetGame()

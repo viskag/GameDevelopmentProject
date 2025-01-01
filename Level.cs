@@ -36,6 +36,7 @@ namespace GameDevelopmentProject
         public void Update(GameTime gametime)
         {
             coinManager.Update(gametime, hero);
+            coinCount = coinManager.coins.Count;
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -98,6 +98,8 @@ namespace GameDevelopmentProject
         {
             gameState.Update();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.X)) gameState.EndGame();
+
             if (!gameState.IsRunning) return;
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -111,7 +113,11 @@ namespace GameDevelopmentProject
 
             levels[currLevel].Update(gameTime);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.X)) gameState.EndGame();
+            if (levels[currLevel].AllCollected())
+            {
+                currLevel += 1;
+                gameState.IsRunning = false;
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -125,7 +131,7 @@ namespace GameDevelopmentProject
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
 
             gameState.Draw(_spriteBatch);
-            if (gameState.IsRunning)
+            if (!gameState.IsGameOver && gameState.IsRunning)
             {
 
                 levels[currLevel].Draw(_spriteBatch);
@@ -135,7 +141,7 @@ namespace GameDevelopmentProject
                 civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch); civ3.Draw(_spriteBatch);
             }
 
-            _spriteBatch.DrawString(font, $"Levens: {hero.lives} Munten: {levels[0].coinManager.coins.Count}", new Vector2(10, 10), Color.Green);
+            _spriteBatch.DrawString(font, $"Levens: {hero.lives} Munten: {levels[currLevel].coinManager.coins.Count}", new Vector2(10, 10), Color.Green);
 
             _spriteBatch.End();
 
