@@ -113,7 +113,7 @@ namespace GameDevelopmentProject
 
             levels[currLevel].Update(gameTime);
 
-            if (levels[currLevel].AllCollected())
+            if (levels[currLevel].AllCollected() && currLevel + 1 < levels.Count)
             {
                 currLevel += 1;
                 gameState.IsRunning = false;
