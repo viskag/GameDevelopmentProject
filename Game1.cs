@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-//using SharpDX.Direct2D1;
-//using SharpDX.Direct2D1;
 
 namespace GameDevelopmentProject
 {
@@ -19,15 +17,13 @@ namespace GameDevelopmentProject
 
         static public int screenWidth = 1600;
         static public int screenHeight = 900;
-
-        private Texture2D startScreenTexture;//REMINDER: NIET VERGETEN TEXTURE TOEVOEGEN!
+        
         private SpriteFont font;
-        private StartGamescreen startScreen;
-        private bool running = false;
 
-        //REMINDER: OOK ZELFDE ZOALS HIERBOVEN, TEXTURE VOOR GAMEOVERSCREEN NIET VERGETEN!
+        //private Texture2D startScreenTexture;//REMINDER: NIET VERGETEN TEXTURE TOEVOEGEN!
+        private StartGamescreen startScreen;
+        //REMINDER: OOK ZELFDE ZOALS HIERBOVEN //TEXTURE VOOR GAMEOVERSCREEN NIET VERGETEN!
         private EndGamescreen endGameScreen;
-        private bool gameOver = false;
 
         private Texture2D coinTexture;
         private Coin coin;
@@ -80,7 +76,6 @@ namespace GameDevelopmentProject
         private void InitializeGameObjects()
         {
             hero = new Hero(heroTexture, 66, 66, Character.Direction.Down);
-            //coin = new Coin(coinTexture, new Vector2(500, 500), 64, 64);
             civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
             civ.position = new Vector2(30);
             civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);

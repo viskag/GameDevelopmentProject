@@ -27,8 +27,6 @@ namespace GameDevelopmentProject
             get;
         }
 
-        public bool isCollected;//opzet voor eventuele alternatief pickup mechanisme ipv coin=null
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, Color.White);

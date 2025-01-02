@@ -60,11 +60,11 @@ namespace GameDevelopmentProject
 
             Move(gameTime, inputKey);
 
-            UpdateAnimationFrame(gameTime); // animation update
+            UpdateAnimationFrame(gameTime);
         }
         private void UpdateAnimationFrame(GameTime gametime)
         {
-            switch (currDirection) // animation frame update/correctie voor huidig direction
+            switch (currDirection)
             {
                 case Direction.Up:
                     animation.currFrame = animation.frames[12 + (animation.frames.IndexOf(animation.currFrame) % 4)];
