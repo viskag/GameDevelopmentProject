@@ -25,8 +25,8 @@ namespace GameDevelopmentProject
         public Vector2 position;
         protected Direction currDirection;
         protected int idleFrameIndex;
-        protected int frameWidth;
-        protected int frameHeight;
+        public int frameWidth;
+        public int frameHeight;
         protected Vector2 currSpeed;
         protected Vector2 walkSpeed;
         protected Vector2 maxSpeed;

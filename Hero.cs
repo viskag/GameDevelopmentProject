@@ -158,7 +158,7 @@ namespace GameDevelopmentProject
         {
             return new Vector2(position.X + frameWidth / 2f, position.Y + frameHeight / 2f);
         }
-        public void loseLive()
+        public void LoseLive()
         {
             if (lives > 0) lives--;
             else lives = 0; // else game over method oproepen

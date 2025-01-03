@@ -38,6 +38,8 @@ namespace GameDevelopmentProject
 
         private GameState gameState;
 
+        private CollisionManager collisionManager;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -87,6 +89,7 @@ namespace GameDevelopmentProject
             levels.Add(new Level(coinTexture, 10, 10, hero));
 
             gameState = new GameState(font);
+            collisionManager = new CollisionManager();
         }
 
         protected override void Update(GameTime gameTime)
@@ -113,6 +116,9 @@ namespace GameDevelopmentProject
                 currLevel += 1;
                 gameState.IsRunning = false;
             }
+
+            collisionManager.HandleCollision(civ, hero);
+            collisionManager.HandleCollision(civ2, hero);
         }
 
         protected override void Draw(GameTime gameTime)
