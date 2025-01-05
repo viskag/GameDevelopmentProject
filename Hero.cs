@@ -10,9 +10,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace GameDevelopmentProject
 {
-    internal class Hero : Character
+    public class Hero : Character
     {
         public int lives = 3;
+        private CollisionManager collisionManager = new CollisionManager();
+        public List<Civilian> civs = new List<Civilian>();
         public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection) : base(texture, fwidth, fheight, startDirection)
         {
             maxSpeed = new Vector2(6, 6);
@@ -70,8 +72,15 @@ namespace GameDevelopmentProject
             if (currSpeed.Y > maxSpeed.Y) currSpeed.Y = maxSpeed.Y;
             if (currSpeed.X < -maxSpeed.X) currSpeed.X = -maxSpeed.X;
             if (currSpeed.Y < -maxSpeed.Y) currSpeed.Y = -maxSpeed.Y;
+
+            Vector2 potentialPosition = position;
+            potentialPosition.X += currSpeed.X;
+            potentialPosition.Y += currSpeed.Y;
+            collisionManager.HandleCollisions(this, potentialPosition, civs);
+
             position.X += currSpeed.X;
             position.Y += currSpeed.Y;
+
             if (position.X > Game1.screenWidth - frameWidth)
             {
                 position.X = Game1.screenWidth - frameWidth;
