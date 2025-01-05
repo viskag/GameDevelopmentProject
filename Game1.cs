@@ -29,6 +29,8 @@ namespace GameDevelopmentProject
         private Coin coin;
 
         private Texture2D civTexture;
+        private Texture2D civTexture0;
+
         private Civilian civ;
         private Civilian civ2;
         private Civilian civ3;
@@ -66,6 +68,7 @@ namespace GameDevelopmentProject
             heroTexture = Content.Load<Texture2D>("assangesprite");
             coinTexture = Content.Load<Texture2D>("./Elements/G3");
             civTexture = Content.Load<Texture2D>("npc");
+            civTexture0 = Content.Load<Texture2D>("npc0");
             backgroundTexture = Content.Load<Texture2D>("ice");
 
             font = Content.Load<SpriteFont>("DefaultFont");
@@ -78,15 +81,15 @@ namespace GameDevelopmentProject
         private void InitializeGameObjects()
         {
             hero = new Hero(heroTexture, 66, 66, Character.Direction.Down);
+
+            levels.Add(new Level(civTexture, coinTexture, 5, 6, hero));
+            levels.Add(new Level(civTexture0, coinTexture, 10, 10, hero));
             civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
             civ.position = new Vector2(30);
             civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
             civ2.position = new Vector2(60);
             civ3 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 2, hero);
             civ3.position = new Vector2(600);
-
-            levels.Add(new Level(coinTexture, 5, 6, hero));
-            levels.Add(new Level(coinTexture, 10, 10, hero));
 
             gameState = new GameState(font);
             collisionManager = new CollisionManager();
@@ -116,9 +119,6 @@ namespace GameDevelopmentProject
                 currLevel += 1;
                 gameState.IsRunning = false;
             }
-
-            collisionManager.HandleCollision(civ, hero);
-            collisionManager.HandleCollision(civ2, hero);
         }
 
         protected override void Draw(GameTime gameTime)

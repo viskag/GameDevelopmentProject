@@ -17,11 +17,23 @@ namespace GameDevelopmentProject
             return rectCiv.Intersects(rectHero);
         }
 
-        public void HandleCollision(Civilian civilian, Hero hero)
+        public void HandleCollisions(Hero hero, Vector2 potentialPosition, Civilian[] civilians)
         {
-            if (CheckCollision(civilian, hero))
+            bool collisionOccurred = false;
+
+            foreach (var civilian in civilians)
             {
-                hero.LoseLive();
+                if (CheckCollision(civilian, hero))
+                {
+                    hero.LoseLive();
+                    collisionOccurred = true;
+                    break;
+                }
+            }
+
+            if (!collisionOccurred)
+            {
+                hero.position = potentialPosition;
             }
         }
     }
