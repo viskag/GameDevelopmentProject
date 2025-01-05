@@ -40,7 +40,7 @@ namespace GameDevelopmentProject
 
         private GameState gameState;
 
-        private CollisionManager collisionManager;
+        //private CollisionManager collisionManager;
 
         public Game1()
         {
@@ -74,6 +74,7 @@ namespace GameDevelopmentProject
             font = Content.Load<SpriteFont>("DefaultFont");
             startScreen = new StartGamescreen(font);
             endGameScreen = new EndGamescreen(font);
+            //collisionManager = new CollisionManager();
 
             InitializeGameObjects();
         }
@@ -84,6 +85,12 @@ namespace GameDevelopmentProject
 
             levels.Add(new Level(civTexture, coinTexture, 3, 6, hero));
             levels.Add(new Level(civTexture0, coinTexture, 4, 8, hero));
+
+            foreach (Civilian civ in levels[0].civilianManager.civilians)//
+            {
+                hero.civs.Add(civ);
+            }
+            
             //civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
             //civ.position = new Vector2(30);
             //civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
@@ -92,7 +99,7 @@ namespace GameDevelopmentProject
             //civ3.position = new Vector2(600);
 
             gameState = new GameState(font);
-            collisionManager = new CollisionManager();
+            //collisionManager = new CollisionManager();
         }
 
         protected override void Update(GameTime gameTime)
@@ -117,6 +124,7 @@ namespace GameDevelopmentProject
             if (levels[currLevel].AllCollected() && currLevel + 1 < levels.Count)
             {
                 currLevel += 1;
+                hero.civs.Clear();//
                 gameState.IsRunning = false;
             }
         }

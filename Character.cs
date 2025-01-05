@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevelopmentProject
 {
-    internal abstract class Character : IGameObject
+    public abstract class Character : IGameObject
     {
         public enum Direction
         {

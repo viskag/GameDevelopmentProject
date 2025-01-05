@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentProject
 {
-    internal class Civilian : Character
+    public class Civilian : Character
     {
         private Random rng = new Random();
         private int aiVersion;
-        private Hero hero;
+        public Hero hero;
         public Civilian(Texture2D texture, int fwidth, int fheight, Direction startDirection, int aiversion, Hero hero):base(texture, fwidth, fheight, startDirection)
         {
             this.aiVersion = aiversion;

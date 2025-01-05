@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentProject.Animation
 {
-    internal class Animation
+    public class Animation
     {
         public Animation()
         {
