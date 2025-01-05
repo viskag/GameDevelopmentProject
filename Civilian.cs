@@ -36,18 +36,23 @@ namespace GameDevelopmentProject
                     this.position += directionHero * 2f;
                 }
             }
+            else if (aiVersion == 2)
+            {
+                this.position += new Vector2(-0.5f, 0);
+                //this.currDirection = Direction.Left;
+            }
             else
             {
                 //geen beweging, stilstaan op plaats
             }
 
-            if (Math.Abs(directionHero.X) > Math.Abs(directionHero.Y))
+            if (Math.Abs(directionHero.X) > Math.Abs(directionHero.Y) && aiVersion < 2)
             {
                 if (directionHero.X < 0) currDirection = Direction.Left;
                 else currDirection = Direction.Right;
             }
-            else if (directionHero.Y < 0) currDirection = Direction.Up;
-            else currDirection = Direction.Down;
+            else if (directionHero.Y < 0 && aiVersion < 2) currDirection = Direction.Up;
+            else currDirection = Direction.Left;
 
             if (aiVersion >= 1 && distanceHero <= 500) currDirection = Direction.Idle;
             // maak een aparte methode updateDirection waar je gemakkelijk directionHero kan meegeven

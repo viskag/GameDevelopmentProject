@@ -82,14 +82,14 @@ namespace GameDevelopmentProject
         {
             hero = new Hero(heroTexture, 66, 66, Character.Direction.Down);
 
-            levels.Add(new Level(civTexture, coinTexture, 5, 6, hero));
-            levels.Add(new Level(civTexture0, coinTexture, 10, 10, hero));
-            civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
-            civ.position = new Vector2(30);
-            civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
-            civ2.position = new Vector2(60);
-            civ3 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 2, hero);
-            civ3.position = new Vector2(600);
+            levels.Add(new Level(civTexture, coinTexture, 3, 6, hero));
+            levels.Add(new Level(civTexture0, coinTexture, 4, 8, hero));
+            //civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
+            //civ.position = new Vector2(30);
+            //civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
+            //civ2.position = new Vector2(60);
+            //civ3 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 2, hero);
+            //civ3.position = new Vector2(600);
 
             gameState = new GameState(font);
             collisionManager = new CollisionManager();
@@ -110,7 +110,7 @@ namespace GameDevelopmentProject
 
             hero.Update(gameTime);
 
-            civ.Update(gameTime); civ2.Update(gameTime); civ3?.Update(gameTime);
+            //civ.Update(gameTime); civ2.Update(gameTime); civ3?.Update(gameTime);
 
             levels[currLevel].Update(gameTime);
 
@@ -139,7 +139,7 @@ namespace GameDevelopmentProject
 
                 hero.Draw(_spriteBatch);
 
-                civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch); civ3.Draw(_spriteBatch);
+                //civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch); civ3.Draw(_spriteBatch);
             }
 
             _spriteBatch.DrawString(font, $"Levens: {hero.lives} Munten: {levels[currLevel].coinManager.coins.Count}", new Vector2(10, 10), Color.Green);

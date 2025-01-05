@@ -33,9 +33,10 @@ namespace GameDevelopmentProject
         {
             for (int i = 0; i < civcount; i++)
             {
-                Vector2 position = new Vector2(rng.Next(64, screenHeight - 64), rng.Next(64, screenWidth - 64));
+                Vector2 position = new Vector2(rng.Next(64, screenWidth - 64), rng.Next(64, screenHeight - 64));
+                int randomAI = rng.Next(0, 3);
 
-                Civilian civ = new Civilian(texture, 64, 64, Character.Direction.Down, 1, hero);
+                Civilian civ = new Civilian(texture, 64, 64, Character.Direction.Down, randomAI, hero);
 
                 civ.position = position;
 
