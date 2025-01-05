@@ -11,8 +11,8 @@ namespace GameDevelopmentProject
     {
         public bool CheckCollision(Civilian civ, Hero hero)
         {
-            Rectangle rectCiv = new Rectangle( (int)civ.position.X, (int)civ.position.Y, civ.frameWidth - 10, civ.frameHeight - 1);
-            Rectangle rectHero = new Rectangle( (int)hero.position.X, (int)hero.position.Y, hero.frameWidth -10, hero.frameHeight - 1);
+            Rectangle rectCiv = new Rectangle( (int)civ.position.X, (int)civ.position.Y, civ.frameWidth - 20, civ.frameHeight - 9);
+            Rectangle rectHero = new Rectangle( (int)hero.position.X, (int)hero.position.Y, hero.frameWidth - 20, hero.frameHeight - 9);
 
             return rectCiv.Intersects(rectHero);
         }
@@ -27,6 +27,7 @@ namespace GameDevelopmentProject
             {
                 if (CheckCollision(civilian, hero))
                 {
+                    hero.LoseLive();
                     collisionOccurred = true;
                     
                     Vector2 bounceVelocity = hero.currSpeed;

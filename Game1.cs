@@ -152,8 +152,8 @@ namespace GameDevelopmentProject
 
                 //civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch); civ3.Draw(_spriteBatch);
             }
-
-            _spriteBatch.DrawString(font, $"Levens: {hero.lives} Munten: {levels[currLevel].coinManager.coins.Count}", new Vector2(10, 10), Color.Green);
+            _spriteBatch.DrawString(font, $"LvL {currLevel}", new Vector2(10, 10), Color.Green);
+            _spriteBatch.DrawString(font, $"Levens:{hero.lives} Munten:{levels[currLevel].coinManager.coins.Count}", new Vector2(500, 10), Color.Green);
 
             _spriteBatch.End();
 
