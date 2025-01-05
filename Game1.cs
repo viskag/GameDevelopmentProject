@@ -99,7 +99,6 @@ namespace GameDevelopmentProject
             //civ3.position = new Vector2(600);
 
             gameState = new GameState(font);
-            //collisionManager = new CollisionManager();
         }
 
         protected override void Update(GameTime gameTime)
@@ -126,6 +125,10 @@ namespace GameDevelopmentProject
                 currLevel += 1;
                 hero.civs.Clear();//
                 gameState.IsRunning = false;
+                foreach (Civilian civ in levels[1].civilianManager.civilians)//
+                {
+                    hero.civs.Add(civ);
+                }
             }
         }
 
