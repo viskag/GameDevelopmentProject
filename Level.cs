@@ -26,9 +26,9 @@ namespace GameDevelopmentProject
             this.coinCount = coinCount;
             civilianManager = new CivilianManager(civilianCount, civTexture, hero);
 
-            LevelSetup(coinCount);
+            LevelSetup();
         }
-        public void LevelSetup(int count)
+        public void LevelSetup()
         {
             coinManager.ScatterCoins(coinCount, Game1.screenHeight, Game1.screenWidth);
             civilianManager.ScatterCivilians(civilianCount, Game1.screenHeight, Game1.screenWidth);

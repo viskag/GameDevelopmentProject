@@ -36,7 +36,7 @@ namespace GameDevelopmentProject
         private Civilian civ3;
 
         private List<Level> levels = new List<Level>();
-        private int currLevel = 0;
+        static public int currLevel;
 
         private GameState gameState;
 
@@ -81,6 +81,7 @@ namespace GameDevelopmentProject
 
         private void InitializeGameObjects()
         {
+            currLevel = 0;
             hero = new Hero(heroTexture, 66, 66, Character.Direction.Down);
 
             levels.Add(new Level(civTexture, coinTexture, 3, 6, hero));
@@ -98,11 +99,19 @@ namespace GameDevelopmentProject
             //civ3 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 2, hero);
             //civ3.position = new Vector2(600);
 
-            gameState = new GameState(font);
+            gameState = new GameState(font, hero);
         }
 
         protected override void Update(GameTime gameTime)
         {
+            if (hero.lives == 0)
+            {
+                gameState.EndGame();
+                levels[currLevel].coinManager.coins.Clear();
+                levels[currLevel].civilianManager.civilians.Clear();
+                levels[currLevel].LevelSetup();
+            }
+
             gameState.Update();
 
             if (Keyboard.GetState().IsKeyDown(Keys.X)) gameState.EndGame();
@@ -152,7 +161,7 @@ namespace GameDevelopmentProject
 
                 //civ.Draw(_spriteBatch); civ2.Draw(_spriteBatch); civ3.Draw(_spriteBatch);
             }
-            _spriteBatch.DrawString(font, $"LvL {currLevel}", new Vector2(10, 10), Color.Green);
+            _spriteBatch.DrawString(font, $"LvL {currLevel + 1}", new Vector2(10, 10), Color.Green);
             _spriteBatch.DrawString(font, $"Levens:{hero.lives} Munten:{levels[currLevel].coinManager.coins.Count}", new Vector2(500, 10), Color.Green);
 
             _spriteBatch.End();

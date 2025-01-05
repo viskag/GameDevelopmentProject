@@ -11,14 +11,16 @@ namespace GameDevelopmentProject
     {
         private StartGamescreen startScreen;
         private EndGamescreen endGameScreen;
+        private Hero hero;
         public bool IsRunning { get; set; }
         public bool IsGameOver { get; set; }
-        public GameState(SpriteFont font)
+        public GameState(SpriteFont font, Hero hero)
         {
             startScreen = new StartGamescreen(font);
             endGameScreen = new EndGamescreen(font);
             IsRunning = false;
             IsGameOver = false;
+            this.hero = hero;
         }
         public void StartGame()
         {
@@ -36,7 +38,13 @@ namespace GameDevelopmentProject
         public void Update()
         {
             if (!IsRunning && startScreen.Update()) IsRunning = true;
-            else if (IsGameOver && endGameScreen.Update()) IsGameOver = false;
+            else if (IsGameOver && endGameScreen.Update())
+            {
+                hero.lives = 3;
+                hero.position = new Microsoft.Xna.Framework.Vector2(500, 500);
+                if (Game1.currLevel > 0) Game1.currLevel -= 1;
+                IsGameOver = false;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
