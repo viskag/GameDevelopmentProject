@@ -55,9 +55,18 @@ namespace GameDevelopmentProject
                             adjustedPosition.Y = civilian.position.Y + civilian.frameHeight;
                     }
 
+                    float positionBuffer = 1.0f;  // Small buffer to avoid exact overlap
+                    adjustedPosition.X += positionBuffer;
+                    adjustedPosition.Y += positionBuffer;
+
                     float smoother = 0.5f;
 
                     bounceVelocity *= smoother;
+
+                    if (Math.Abs(bounceVelocity.X) < 0.5f)
+                        bounceVelocity.X = Math.Sign(bounceVelocity.X) * 0.5f;
+                    if (Math.Abs(bounceVelocity.Y) < 0.5f)
+                        bounceVelocity.Y = Math.Sign(bounceVelocity.Y) * 0.5f;
 
                     hero.currSpeed = bounceVelocity;
 

@@ -170,7 +170,7 @@ namespace GameDevelopmentProject
         public void LoseLive()
         {
             if (lives > 0) lives--;
-            else lives = 0; // else game over method oproepen
+            else lives = 0;
         }
     }
 }
