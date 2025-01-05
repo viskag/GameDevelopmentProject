@@ -13,20 +13,25 @@ namespace GameDevelopmentProject
     {
         public static Random rng = new Random();
         public static int id = 0;
+        public int coinCount;
+        public int civilianCount;
         public Hero hero;
         public CoinManager coinManager;
-        public int coinCount;
-        public Level(Texture2D ctexture, int civilianCount, int coinCount, Hero hero)
+        public CivilianManager civilianManager;
+        public Level(Texture2D civTexture, Texture2D cointexture, int civilianCount, int coinCount, Hero hero)
         {
             id += 1;
             this.hero = hero;
-            coinManager = new CoinManager(ctexture);
+            coinManager = new CoinManager(cointexture);
             this.coinCount = coinCount;
+            civilianManager = new CivilianManager(civilianCount, civTexture, hero);
+
             LevelSetup(coinCount);
         }
         public void LevelSetup(int count)
         {
             coinManager.ScatterCoins(coinCount, Game1.screenHeight, Game1.screenWidth);
+            civilianManager.ScatterCivilians(civilianCount, Game1.screenHeight, Game1.screenWidth);
         }
         public bool AllCollected()
         {
@@ -37,11 +42,13 @@ namespace GameDevelopmentProject
         {
             coinManager.Update(gametime, hero);
             coinCount = coinManager.coins.Count;
+            civilianManager.Update(gametime, hero);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             coinManager.Draw(spriteBatch);
+            civilianManager.Draw(spriteBatch);
         }
     }
 }

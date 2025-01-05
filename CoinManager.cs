@@ -12,12 +12,12 @@ namespace GameDevelopmentProject
     {
         public List<Coin> coins;
         private static Random rng = new Random();
-        public Texture2D coinTexture;
+        public Texture2D texture;
 
         public CoinManager(Texture2D coinTexture)
         {
             coins = new List<Coin>();
-            this.coinTexture = coinTexture;
+            texture = coinTexture;
         }
 
         public void ScatterCoins(int coinCount, int screenWidth, int screenHeight)
@@ -26,7 +26,7 @@ namespace GameDevelopmentProject
             {
                 Vector2 position = new Vector2(rng.Next(64, screenHeight - 64), rng.Next(64, screenWidth - 64));
 
-                Coin coin = new Coin(coinTexture, position, 64, 64);
+                Coin coin = new Coin(texture, position, 64, 64);
 
                 coins.Add(coin);
             }

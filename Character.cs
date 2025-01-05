@@ -23,14 +23,14 @@ namespace GameDevelopmentProject
         protected Texture2D texture;
         protected Animation.Animation animation;
         public Vector2 position;
-        protected Direction currDirection;
-        protected int idleFrameIndex;
+        public Direction currDirection;
+        public int idleFrameIndex;
         public int frameWidth;
         public int frameHeight;
-        protected Vector2 currSpeed;
-        protected Vector2 walkSpeed;
-        protected Vector2 maxSpeed;
-        protected Vector2 accSpeed;
+        public Vector2 currSpeed;
+        public Vector2 walkSpeed;
+        public Vector2 maxSpeed;
+        public Vector2 accSpeed;
 
         public Character(Texture2D texture, int fwidth, int fheight, Direction startDirection)
         {
