@@ -8,7 +8,7 @@ using static GameDevelopmentProject.Characters.Character;
 
 namespace GameDevelopmentProject.Characters
 {
-    internal class FastCivilian : Civilian
+    public class FastCivilian : Civilian
     {
         public FastCivilian(Texture2D texture, int fwidth, int fheight, Direction startDirection, int aiversion, Hero hero)
             : base(texture, fwidth, fheight, startDirection, aiversion, hero)
