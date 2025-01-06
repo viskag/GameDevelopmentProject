@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevelopmentProject.Characters;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GameDevelopmentProject.Characters.Character;
 
 namespace GameDevelopmentProject.Animation
 {
@@ -32,6 +34,27 @@ namespace GameDevelopmentProject.Animation
                 frameMovement = 0;
             }
             if (counter >= frames.Count) { counter = 0; }
+        }
+        public void UpdateAnimationFrame(GameTime gametime, Character.Direction currDirection, int idleFrameIndex)
+        {
+            switch (currDirection)
+            {
+                case Direction.Up:
+                    currFrame = frames[12 + frames.IndexOf(currFrame) % 4];
+                    break;
+                case Direction.Down:
+                    currFrame = frames[0 + frames.IndexOf(currFrame) % 4];
+                    break;
+                case Direction.Left:
+                    currFrame = frames[4 + frames.IndexOf(currFrame) % 4];
+                    break;
+                case Direction.Right:
+                    currFrame = frames[8 + frames.IndexOf(currFrame) % 4];
+                    break;
+                case Direction.Idle:
+                    currFrame = frames[idleFrameIndex];
+                    break;
+            }
         }
     }
 }

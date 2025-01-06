@@ -86,7 +86,7 @@ namespace GameDevelopmentProject.Characters
 
             Move(gameTime, inputKey);
 
-            UpdateAnimationFrame(gameTime);
+            animation.UpdateAnimationFrame(gameTime, currDirection, idleFrameIndex);
         }
     }
 }
