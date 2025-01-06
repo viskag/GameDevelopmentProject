@@ -15,7 +15,7 @@ namespace GameDevelopmentProject.Characters
     {
         public int lives = 3;
         private CollisionManager collisionManager = new CollisionManager();
-        public List<Civilian> civs = new List<Civilian>();
+        public List<SlowCivilian> civs = new List<SlowCivilian>();
         public Hero(Texture2D texture, int fwidth, int fheight, Direction startDirection) : base(texture, fwidth, fheight, startDirection)
         {
             maxSpeed = new Vector2(6, 6);
