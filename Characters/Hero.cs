@@ -106,22 +106,22 @@ namespace GameDevelopmentProject.Characters
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0)
             {
                 currDirection = Direction.Up;
-                idleFrameIndex = 12; // idle frame bijhouden
+                idleFrameIndex = 12;
             }
             else if (inputKey.IsKeyDown(Keys.Down) && position.Y + currSpeed.Y <= Game1.screenHeight - frameHeight)
             {
                 currDirection = Direction.Down;
-                idleFrameIndex = 0; // idle frame bijhouden
+                idleFrameIndex = 0;
             }
             else if (inputKey.IsKeyDown(Keys.Left) && position.X - currSpeed.X >= 0)
             {
                 currDirection = Direction.Left;
-                idleFrameIndex = 4; // idle frame bijhouden
+                idleFrameIndex = 4;
             }
             else if (inputKey.IsKeyDown(Keys.Right) && position.X + currSpeed.X <= Game1.screenWidth - frameWidth)
             {
                 currDirection = Direction.Right;
-                idleFrameIndex = 8; // idle frame bijhouden
+                idleFrameIndex = 8;
             }
             else currDirection = Direction.Idle;
         }

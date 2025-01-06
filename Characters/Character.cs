@@ -69,26 +69,5 @@ namespace GameDevelopmentProject.Characters
             spriteBatch.Draw(texture, position, animation.currFrame.sourceRectangle, Color.White);
 
         }
-        //protected void UpdateAnimationFrame(GameTime gametime)
-        //{
-        //    switch (currDirection)
-        //    {
-        //        case Direction.Up:
-        //            animation.currFrame = animation.frames[12 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Down:
-        //            animation.currFrame = animation.frames[0 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Left:
-        //            animation.currFrame = animation.frames[4 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Right:
-        //            animation.currFrame = animation.frames[8 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Idle:
-        //            animation.currFrame = animation.frames[idleFrameIndex];
-        //            break;
-        //    }
-        //}
     }
 }
