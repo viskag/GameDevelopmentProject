@@ -115,6 +115,12 @@ namespace GameDevelopmentProject
                 levels[currLevel].LevelSetup();
             }
 
+            if (currLevel + 1 == levels.Count && levels[currLevel].AllCollected())
+            {
+                gameState.WinGame();
+                return;
+            }
+
             gameState.Update();
 
             if (Keyboard.GetState().IsKeyDown(Keys.X)) gameState.EndGame();

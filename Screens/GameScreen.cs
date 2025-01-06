@@ -13,6 +13,7 @@ namespace GameDevelopmentProject.Screens
         protected string message;
         protected SpriteFont font;
         protected Color backgroundColor;
+        protected Vector2 messagePosition;
 
         public GameScreen(SpriteFont spriteFont, string message, Color backgroundColor)
         {
@@ -24,10 +25,8 @@ namespace GameDevelopmentProject.Screens
         public void Draw(SpriteBatch spriteBatch)
         {
             Vector2 messageSize = font.MeasureString(message);
-            Vector2 messagePosition = new Vector2(
-                (spriteBatch.GraphicsDevice.Viewport.Width - messageSize.X) / 2,
-                (spriteBatch.GraphicsDevice.Viewport.Height - messageSize.Y) / 2
-            );
+            messagePosition = new Vector2((spriteBatch.GraphicsDevice.Viewport.Width - messageSize.X)/2,
+                (spriteBatch.GraphicsDevice.Viewport.Height - messageSize.Y) / 2);
 
             spriteBatch.DrawString(font, message, messagePosition, Color.Red);
         }

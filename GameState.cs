@@ -13,13 +13,16 @@ namespace GameDevelopmentProject
     {
         private StartGamescreen startScreen;
         private EndGamescreen endGameScreen;
+        private WinGameScreen winGameScreen;
         private Hero hero;
         public bool IsRunning { get; set; }
         public bool IsGameOver { get; set; }
+        public bool IsWon { get; set; }
         public GameState(SpriteFont font, Hero hero)
         {
             startScreen = new StartGamescreen(font);
             endGameScreen = new EndGamescreen(font);
+            winGameScreen = new WinGameScreen(font);
             IsRunning = false;
             IsGameOver = false;
             this.hero = hero;
@@ -37,6 +40,13 @@ namespace GameDevelopmentProject
             IsRunning = false;
             IsGameOver = false;
         }
+
+        public void WinGame()
+        {
+            IsWon = true;
+            IsRunning = true;
+            IsGameOver = false;
+        }
         public void Update()
         {
             if (!IsRunning && startScreen.Update()) IsRunning = true;
@@ -50,7 +60,8 @@ namespace GameDevelopmentProject
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (!IsRunning) startScreen.Draw(spriteBatch);
+            if (IsWon) winGameScreen.Draw(spriteBatch);
+            else if (!IsRunning) startScreen.Draw(spriteBatch);
             else if (IsGameOver) endGameScreen.Draw(spriteBatch);
         }
     }
