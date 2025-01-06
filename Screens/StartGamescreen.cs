@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameDevelopmentProject
+namespace GameDevelopmentProject.Screens
 {
     internal class StartGamescreen : GameScreen
     {
-        public StartGamescreen(SpriteFont spriteFont):base(spriteFont, "Press Enter to Start", Color.CornflowerBlue)
+        public StartGamescreen(SpriteFont spriteFont) : base(spriteFont, "Press Enter to Start...", Color.White)
         {
 
         }

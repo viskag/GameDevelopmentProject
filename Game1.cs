@@ -1,5 +1,6 @@
 ﻿using GameDevelopmentProject.Characters;
 using GameDevelopmentProject.MapElements;
+using GameDevelopmentProject.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

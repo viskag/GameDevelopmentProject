@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameDevelopmentProject
+namespace GameDevelopmentProject.Screens
 {
     internal abstract class GameScreen
     {
@@ -16,7 +16,7 @@ namespace GameDevelopmentProject
 
         public GameScreen(SpriteFont spriteFont, string message, Color backgroundColor)
         {
-            this.font = spriteFont;
+            font = spriteFont;
             this.message = message;
             this.backgroundColor = backgroundColor;
         }
@@ -29,7 +29,7 @@ namespace GameDevelopmentProject
                 (spriteBatch.GraphicsDevice.Viewport.Height - messageSize.Y) / 2
             );
 
-            spriteBatch.DrawString(font, message, messagePosition, Color.White);
+            spriteBatch.DrawString(font, message, messagePosition, Color.Red);
         }
 
         public abstract bool Update();

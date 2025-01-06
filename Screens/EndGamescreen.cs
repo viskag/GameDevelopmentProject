@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameDevelopmentProject
+namespace GameDevelopmentProject.Screens
 {
     internal class EndGamescreen : GameScreen
     {
-        public EndGamescreen(SpriteFont spriteFont):base(spriteFont, "Game Over! Press Enter voor Reset", Color.Black)
+        public EndGamescreen(SpriteFont spriteFont) : base(spriteFont, "The End!", Color.Black)
         {
 
         }
