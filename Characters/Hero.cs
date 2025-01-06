@@ -134,7 +134,7 @@ namespace GameDevelopmentProject.Characters
 
             Move(gametime, inputKey);
 
-            animation.UpdateAnimationFrame(gametime, currDirection);
+            animation.UpdateAnimationFrame(gametime, currDirection, idleFrameIndex);
         }
 
         public Vector2 GetCenter()
