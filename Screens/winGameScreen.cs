@@ -11,7 +11,7 @@ namespace GameDevelopmentProject.Screens
 {
     internal class WinGameScreen:GameScreen
     {
-        public WinGameScreen(SpriteFont spriteFont):base(spriteFont, "You Win!", Color.Green)
+        public WinGameScreen(SpriteFont spriteFont):base(spriteFont, " * * * YOU WIN * * *", Color.Green)
         {
             messagePosition.X += 200;
             messagePosition.Y += 200;

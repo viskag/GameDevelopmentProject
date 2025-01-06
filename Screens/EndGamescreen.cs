@@ -11,7 +11,7 @@ namespace GameDevelopmentProject.Screens
 {
     internal class EndGamescreen : GameScreen
     {
-        public EndGamescreen(SpriteFont spriteFont) : base(spriteFont, "The End!", Color.Black)
+        public EndGamescreen(SpriteFont spriteFont) : base(spriteFont, "Game Over", Color.Black)
         {
 
         }
