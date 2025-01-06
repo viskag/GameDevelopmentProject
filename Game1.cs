@@ -12,16 +12,17 @@ namespace GameDevelopmentProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D backgroundTexture;
-        private SpriteFont font;
+
         public static int screenWidth = 1600;
         public static int screenHeight = 900;
+
+        private Texture2D backgroundTexture;
+        private SpriteFont font;
 
         private Hero hero;
         private List<Level> levels = new List<Level>();
 
         private GameController gameControl;
-        //REMINDER:
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -49,15 +50,9 @@ namespace GameDevelopmentProject
             backgroundTexture = Content.Load<Texture2D>("ice");
             hero = new Hero(Content.Load<Texture2D>("assangesprite"), 66, 66, Character.Direction.Down);
 
-            
-            levels.Add(new Level(Content.Load<Texture2D>("npc"), Content.Load<Texture2D>("./Elements/G3"), 3, 6, hero));
-            levels.Add(new Level(Content.Load<Texture2D>("npc0"), Content.Load<Texture2D>("./Elements/G3"), 4, 8, hero));
-            //civ = new Civilian(civTexture, 64, 64, Character.Direction.Down, 0, hero);
-            //civ.position = new Vector2(30);
-            //civ2 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 1, hero);
-            //civ2.position = new Vector2(60);
-            //civ3 = new Civilian(civTexture, 64, 64, Character.Direction.Down, 2, hero);
-            //civ3.position = new Vector2(600);
+            levels.Add(new Level(Content.Load<Texture2D>("npc"), Content.Load<Texture2D>("./Elements/G3"), 1, 2, hero));
+            levels.Add(new Level(Content.Load<Texture2D>("npc0"), Content.Load<Texture2D>("./Elements/G3"), 2, 3, hero));
+            levels.Add(new Level(Content.Load<Texture2D>("npc7"), Content.Load<Texture2D>("./Elements/G3"), 3, 4, hero));
 
             gameControl = new GameController(font, hero, levels);
         }
