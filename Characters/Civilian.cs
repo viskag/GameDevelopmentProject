@@ -64,7 +64,7 @@ namespace GameDevelopmentProject.Characters
             }
             else
             {
-                //geen beweging, stilstaan op plaats, zogezegd '4de AI type'
+                // geen beweging, stilstaan op plaats, zogezegd '4de AI type'
             }
 
             if (Math.Abs(directionHero.X) > Math.Abs(directionHero.Y) && aiVersion < 2)
