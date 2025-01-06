@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameDevelopmentProject
+namespace GameDevelopmentProject.MapElements
 {
     internal class Coin : IGameObject
     {
@@ -16,11 +16,11 @@ namespace GameDevelopmentProject
         private int height;
         public Coin(Texture2D ctexture, Vector2 position, int width, int height)
         {
-            this.texture = ctexture;
-            this.Position = position;
+            texture = ctexture;
+            Position = position;
             this.width = width;
             this.height = height;
-            this.Radius = width / 2f;
+            Radius = width / 2f;
         }
         public float Radius
         {

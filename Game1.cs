@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevelopmentProject.Characters;
+using GameDevelopmentProject.MapElements;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
