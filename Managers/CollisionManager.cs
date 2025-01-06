@@ -64,11 +64,6 @@ namespace GameDevelopmentProject.Managers
 
                     bounceVelocity *= smoother;
 
-                    //if (Math.Abs(bounceVelocity.X) < 0.5f) //tijdelijkfix tegen 'scuffy' collision probleem: minimum bounce
-                    //bounceVelocity.X = Math.Sign(bounceVelocity.X) * 0.5f;
-                    //if (Math.Abs(bounceVelocity.Y) < 0.5f)
-                    //bounceVelocity.Y = Math.Sign(bounceVelocity.Y) * 0.5f;
-
                     hero.currSpeed = bounceVelocity;
 
                     hero.position = adjustedPosition;

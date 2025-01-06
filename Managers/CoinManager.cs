@@ -57,7 +57,6 @@ namespace GameDevelopmentProject.Managers
                 }
             }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Coin coin in coins)

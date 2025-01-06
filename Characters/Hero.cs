@@ -142,28 +142,6 @@ namespace GameDevelopmentProject.Characters
             UpdateAnimationFrame(gametime); // animation update
         }
 
-        //private void UpdateAnimationFrame(GameTime gametime)
-        //{
-        //    switch (currDirection) // animation frame update/correctie voor huidig direction
-        //    {
-        //        case Direction.Up:
-        //            animation.currFrame = animation.frames[12 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Down:
-        //            animation.currFrame = animation.frames[0 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Left:
-        //            animation.currFrame = animation.frames[4 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Right:
-        //            animation.currFrame = animation.frames[8 + animation.frames.IndexOf(animation.currFrame) % 4];
-        //            break;
-        //        case Direction.Idle:
-        //            animation.currFrame = animation.frames[idleFrameIndex];
-        //            break;
-        //    }
-        //}
-
         public Vector2 GetCenter() // centrum coordinaten van de held
         {
             return new Vector2(position.X + frameWidth / 2f, position.Y + frameHeight / 2f);
