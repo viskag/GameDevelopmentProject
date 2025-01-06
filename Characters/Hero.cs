@@ -105,44 +105,39 @@ namespace GameDevelopmentProject.Characters
 
             if (inputKey.IsKeyDown(Keys.Up) && position.Y - currSpeed.Y >= 0)
             {
-                //position.Y -= currSpeed.Y; // ga naar boven
                 currDirection = Direction.Up;
                 idleFrameIndex = 12; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Down) && position.Y + currSpeed.Y <= Game1.screenHeight - frameHeight)
             {
-                //position.Y += currSpeed.Y; // ga naar beneden
                 currDirection = Direction.Down;
                 idleFrameIndex = 0; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Left) && position.X - currSpeed.X >= 0)
             {
-                //position.X -= currSpeed.X; // ga naar links
                 currDirection = Direction.Left;
                 idleFrameIndex = 4; // idle frame bijhouden
             }
             else if (inputKey.IsKeyDown(Keys.Right) && position.X + currSpeed.X <= Game1.screenWidth - frameWidth)
             {
-                //position.X += currSpeed.X; // ga naar rechts
                 currDirection = Direction.Right;
                 idleFrameIndex = 8; // idle frame bijhouden
             }
             else currDirection = Direction.Idle;
-            //currSpeed = walkSpeed; // terug op walkspeed zetten
         }
 
         public void Update(GameTime gametime)
         {
             base.Update(gametime);
 
-            KeyboardState inputKey = Keyboard.GetState(); // ophalen bewegingsinput
+            KeyboardState inputKey = Keyboard.GetState();
 
-            Move(gametime, inputKey); // move method uitvoeren afh vd keyboardstate
+            Move(gametime, inputKey);
 
-            UpdateAnimationFrame(gametime); // animation update
+            UpdateAnimationFrame(gametime);
         }
 
-        public Vector2 GetCenter() // centrum coordinaten van de held
+        public Vector2 GetCenter()
         {
             return new Vector2(position.X + frameWidth / 2f, position.Y + frameHeight / 2f);
         }

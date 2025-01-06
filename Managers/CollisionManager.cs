@@ -56,7 +56,7 @@ namespace GameDevelopmentProject.Managers
                         adjustedPosition.Y = civilian.position.Y + civilian.frameHeight;
                     }
 
-                    float positionBuffer = 1.0f; // tijdelijke fix: buffer toevoegen om gescufde collision verbeteren
+                    float positionBuffer = 1.0f;
                     adjustedPosition.X += positionBuffer;
                     adjustedPosition.Y += positionBuffer;
 
