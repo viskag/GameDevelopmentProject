@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentProject.Managers
 {
-    internal class CoinManager
+    public class CoinManager
     {
         public List<Coin> coins;
         private static Random rng = new Random();

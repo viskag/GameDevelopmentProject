@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameDevelopmentProject
+namespace GameDevelopmentProject.Levels
 {
-    internal class Level : IGameObject
+    public class Level : IGameObject
     {
         public static Random rng = new Random();
         public static int id = 0;

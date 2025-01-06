@@ -1,4 +1,5 @@
 ﻿using GameDevelopmentProject.Characters;
+using GameDevelopmentProject.Levels;
 using GameDevelopmentProject.MapElements;
 using GameDevelopmentProject.Screens;
 using Microsoft.Xna.Framework;
@@ -50,9 +51,9 @@ namespace GameDevelopmentProject
             backgroundTexture = Content.Load<Texture2D>("ice");
             hero = new Hero(Content.Load<Texture2D>("assangesprite"), 66, 66, Character.Direction.Down);
 
-            levels.Add(new Level(Content.Load<Texture2D>("npc"), Content.Load<Texture2D>("./Elements/G3"), 1, 2, hero));
-            levels.Add(new Level(Content.Load<Texture2D>("npc0"), Content.Load<Texture2D>("./Elements/G3"), 2, 3, hero));
-            levels.Add(new Level(Content.Load<Texture2D>("npc7"), Content.Load<Texture2D>("./Elements/G3"), 3, 4, hero));
+            levels.Add(LevelFactory.CreateLevel(1,2,Content.Load<Texture2D>("npc"), Content.Load<Texture2D>("./Elements/G3"), hero));
+            levels.Add(LevelFactory.CreateLevel(2,3,Content.Load<Texture2D>("npc0"), Content.Load<Texture2D>("./Elements/G3"), hero));
+            levels.Add(LevelFactory.CreateLevel(3,3,Content.Load<Texture2D>("npc7"), Content.Load<Texture2D>("./Elements/G3"), hero));
 
             gameControl = new GameController(font, hero, levels);
         }

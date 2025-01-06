@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GameDevelopmentProject.Managers
 {
-    internal class CivilianManager
+    public class CivilianManager
     {
         public List<Civilian> civilians;
         public static Random rng = new Random();

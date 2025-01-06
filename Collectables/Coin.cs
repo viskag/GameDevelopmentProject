@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentProject.MapElements
 {
-    internal class Coin : IGameObject
+    public class Coin : IGameObject
     {
         private Texture2D texture;
         public Vector2 Position { get; private set; }
