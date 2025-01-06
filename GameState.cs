@@ -54,7 +54,7 @@ namespace GameDevelopmentProject
             {
                 hero.lives = 3;
                 hero.position = new Microsoft.Xna.Framework.Vector2(500, 500);
-                if (Game1.currLevel > 0) Game1.currLevel -= 1;
+                if (GameController.currLevel > 0) GameController.currLevel -= 1;
                 IsGameOver = false;
             }
         }
