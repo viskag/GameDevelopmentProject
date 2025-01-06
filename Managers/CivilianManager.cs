@@ -12,20 +12,20 @@ namespace GameDevelopmentProject.Managers
 {
     public class CivilianManager
     {
-        public List<Civilian> civilians;
+        public List<SlowCivilian> civilians;
         public static Random rng = new Random();
         private Texture2D texture;
         int civcount;
         public Hero hero;
         public CivilianManager(int civcount, Texture2D civTexture, Hero hero)
         {
-            civilians = new List<Civilian>();
+            civilians = new List<SlowCivilian>();
             texture = civTexture;
             this.civcount = civcount;
             this.hero = hero;
         }
 
-        public void AddCivilian(Civilian civilian)
+        public void AddCivilian(SlowCivilian civilian)
         {
             civilians.Add(civilian);
         }
@@ -37,7 +37,7 @@ namespace GameDevelopmentProject.Managers
                 Vector2 position = new Vector2(rng.Next(64, screenWidth - 64), rng.Next(64, screenHeight - 64));
                 int randomAI = rng.Next(0, 3);
 
-                Civilian civ = new Civilian(texture, 64, 64, Character.Direction.Down, randomAI, hero);
+                SlowCivilian civ = new SlowCivilian(texture, 64, 64, Character.Direction.Down, randomAI, hero);
 
                 civ.position = position;
 

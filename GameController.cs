@@ -112,7 +112,7 @@ namespace GameDevelopmentProject
 
         private void LoadLevel(int levelIndex)
         {
-            foreach (Civilian civ in levels[levelIndex].civilianManager.civilians)
+            foreach (SlowCivilian civ in levels[levelIndex].civilianManager.civilians)
             {
                 hero.civs.Add(civ);
             }

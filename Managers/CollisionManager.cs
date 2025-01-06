@@ -18,7 +18,7 @@ namespace GameDevelopmentProject.Managers
             return rectCiv.Intersects(rectHero);
         }
 
-        public void HandleCollisions(Hero hero, Vector2 potentialPosition, List<Civilian> civilians)
+        public void HandleCollisions(Hero hero, Vector2 potentialPosition, List<SlowCivilian> civilians)
         {
             bool collisionOccurred = false;
 

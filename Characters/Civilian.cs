@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentProject.Characters
 {
-    public class Civilian : Character
+    public abstract class Civilian : Character
     {
         private Random rng = new Random();
-        private int aiVersion;
+        protected int aiVersion;
         public Hero hero;
+        public float walkSpeed;
         public Civilian(Texture2D texture, int fwidth, int fheight, Direction startDirection, int aiversion, Hero hero) : base(texture, fwidth, fheight, startDirection)
         {
             aiVersion = aiversion;
@@ -27,13 +28,13 @@ namespace GameDevelopmentProject.Characters
             directionHero.Normalize();
             if (aiVersion == 0)
             {
-                position += directionHero * 2f;
+                position += directionHero * walkSpeed;
             }
             else if (aiVersion == 1)
             {
                 if (distanceHero > 500)
                 {
-                    position += directionHero * 2f;
+                    position += directionHero * walkSpeed;
                 }
             }
             else if (aiVersion == 2)

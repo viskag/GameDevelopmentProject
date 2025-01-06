@@ -28,7 +28,6 @@ namespace GameDevelopmentProject.Characters
         public int frameWidth;
         public int frameHeight;
         public Vector2 currSpeed;
-        public Vector2 walkSpeed;
         public Vector2 maxSpeed;
         public Vector2 accSpeed;
 
