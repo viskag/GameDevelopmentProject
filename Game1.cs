@@ -51,11 +51,12 @@ namespace GameDevelopmentProject
             backgroundTexture = Content.Load<Texture2D>("ice");
             hero = new Hero(Content.Load<Texture2D>("assangesprite"), 66, 66, Character.Direction.Down);
 
-            levels.Add(LevelFactory.CreateLevel(1,2,Content.Load<Texture2D>("npc"), Content.Load<Texture2D>("./Elements/G3"), hero));
-            levels.Add(LevelFactory.CreateLevel(2,3,Content.Load<Texture2D>("npc0"), Content.Load<Texture2D>("./Elements/G3"), hero));
-            levels.Add(LevelFactory.CreateLevel(3,3,Content.Load<Texture2D>("npc7"), Content.Load<Texture2D>("./Elements/G3"), hero));
+            levels.Add(LevelFactory.CreateLevel(1,Content.Load<Texture2D>("npc"), Content.Load<Texture2D>("./Elements/G3"), hero));
+            levels.Add(LevelFactory.CreateLevel(2,Content.Load<Texture2D>("npc0"), Content.Load<Texture2D>("./Elements/G3"), hero));
+            levels.Add(LevelFactory.CreateLevel(3,Content.Load<Texture2D>("npc7"), Content.Load<Texture2D>("./Elements/G3"), hero));
 
-            gameControl = new GameController(font, hero, levels);
+            gameControl = GameController.GetInstance();
+            gameControl.Init(font, hero, levels);
         }
 
         protected override void Update(GameTime gameTime)

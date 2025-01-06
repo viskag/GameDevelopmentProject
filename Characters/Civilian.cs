@@ -38,8 +38,7 @@ namespace GameDevelopmentProject.Characters
             }
             else if (aiVersion == 2)
             {
-                position += new Vector2(-0.5f, 0);
-                //this.currDirection = Direction.Left;
+                position += new Vector2(-0.8f, 0);
             }
             else
             {
@@ -55,7 +54,6 @@ namespace GameDevelopmentProject.Characters
             else currDirection = Direction.Left;
 
             if (aiVersion >= 1 && distanceHero <= 500) currDirection = Direction.Idle;
-            // maak een aparte methode updateDirection waar je gemakkelijk directionHero kan meegeven
         }
         public void Update(GameTime gameTime)
         {

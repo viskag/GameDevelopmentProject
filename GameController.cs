@@ -13,18 +13,41 @@ namespace GameDevelopmentProject
 {
     internal class GameController
     {
+        private static GameController _instance;
+        private static readonly object _lock = new object();
+
         private SpriteFont font;
         private Hero hero;
         private List<Level> levels;
         public static int currLevel;
         private GameState gameState;
 
-        public GameController(SpriteFont font, Hero hero, List<Level> levels)
+        private  GameController()
+        {
+            currLevel = 0;
+            this.gameState = new GameState(font, hero);
+        }
+
+        public static GameController GetInstance()
+        {
+            if (_instance == null)
+            {
+                lock (_lock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new GameController();
+                    }
+                }
+            }
+            return _instance;
+        }
+
+        public void Init(SpriteFont font, Hero hero, List<Level> levels)
         {
             this.font = font;
             this.hero = hero;
             this.levels = levels;
-            currLevel = 0;
             this.gameState = new GameState(font, hero);
         }
 
