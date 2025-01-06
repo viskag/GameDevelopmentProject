@@ -9,36 +9,21 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentProject
 {
-    internal class EndGamescreen
+    internal class EndGamescreen : GameScreen
     {
-        private Color backgroundColor = Color.Black;
-        private string message = "Game Over! Press Enter voor Reset";
-        private SpriteFont font;
-
-        public EndGamescreen(SpriteFont spriteFont)
+        public EndGamescreen(SpriteFont spriteFont):base(spriteFont, "Game Over! Press Enter voor Reset", Color.Black)
         {
-            font = spriteFont;
+
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            Vector2 messageSize = font.MeasureString(message);
-            Vector2 messagePosition = new Vector2(
-                (spriteBatch.GraphicsDevice.Viewport.Width - messageSize.X) / 2,
-                (spriteBatch.GraphicsDevice.Viewport.Height - messageSize.Y) / 2
-            );
-
-            spriteBatch.DrawString(font, message, messagePosition, Color.White);
-        }
-
-        public bool Update()
+        public override bool Update()
         {
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Enter))
             {
-                return true; // opnieuw beginnen
+                return true;
             }
-            return false; // blijven op dit screen
+            return false;
         }
     }
 }
